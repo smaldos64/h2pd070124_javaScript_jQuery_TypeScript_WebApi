@@ -11,11 +11,12 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
   <script src="javaScriptFiles/javaScriptFunctions.js"></script>
   <script src="jQueryFiles/jQueryFunctions"></script>
-  <link rel="stylesheet" href="StyleSheetFiles/Stylesheet.css"/>
+  <link rel="stylesheet" href="StyleSheetFiles/Stylesheetless.css"/>
 </head>
 
 <body>
   <ul class="topnav">
+    <li><a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html'); return false">Home</a></li> 
     <li><a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html'); return false">javaScriptDemo</a></li> 
     <li><a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'jQueryDemo.html'); return false">jQueryDemo</a></li> 
   </ul>
@@ -32,6 +33,6 @@
   //window.onload = InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html');
 
   $(document).ready(function() {
-    InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html');
+    InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html');
   });
 </script>

@@ -1,0 +1,74 @@
+@BackgroundColor: black;
+@FontSize_Basic: 15px;
+
+body {
+    margin: 0;
+    background-color: @BackgroundColor + #FF00FF;
+  }
+  
+  ul.topnav
+  {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: @BackgroundColor + #007700;
+        li 
+        {
+            float: left;
+            a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                &:hover:not(.active)
+                {
+                    background-color: #111;
+                }
+              }
+            a.active
+            {
+                background-color: #04AA6D;
+            }
+        }
+        li.right 
+        {
+            float: right;
+        }
+}
+  
+@media screen and (max-width: 600px) 
+{
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+}
+
+#btnShow1
+{
+    background-color: orange;
+}
+
+.ContentFrameForHTMLFiles
+{
+    background-color: blue;
+}
+
+.Set-Stuff(@Size: @FontSize_Basic, @background-Color: orange)
+{
+    font-size: @Size;
+    background-color: @background-Color;
+}
+
+.Test 
+{
+    h2 
+    {
+        .Set-Stuff(1.5*@FontSize_Basic, gold);
+    }
+}
+
+h2 
+    {
+        .Set-Stuff(2 * @FontSize_Basic, silver);
+    }
