@@ -1,5 +1,30 @@
+//var pageNames = [];
+
 function InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery(targetClassName, url) 
 {
-  // $(".ContentFrameForHTMLFiles").load(url);
   $("." + targetClassName).load(url);
+  HandleNavigationBar(url);
 }
+
+function HandleNavigationBar(url) 
+{
+  $(".topnav li a").removeClass("active");
+  
+  $(".topnav li a").each(function() {
+    if ($(this).text() + ".html" === url)
+    {
+      $(this).addClass("active");
+      return false;
+    }
+  });
+}
+
+// function MakePageList(sourceClassName)
+// {
+//   $("." + sourceClassName + " li a").each(function() {
+//   //$(".topnav li").each(function() {
+//     var pageName = $(this).text() + ".html";
+//     //var pageName1 = $(this).data-page-name;
+//     pageNames.push(pageName);
+//   });
+// }

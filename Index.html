@@ -16,7 +16,7 @@
 
 <body>
   <ul class="topnav">
-    <li><a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_javaScript('ContentFrameForHTMLFiles', 'javaScriptDemo.html'); return false">javaScriptDemo</a></li> 
+    <li><a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html'); return false">javaScriptDemo</a></li> 
     <li><a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'jQueryDemo.html'); return false">jQueryDemo</a></li> 
   </ul>
 
@@ -29,5 +29,9 @@
 </html>
 
 <script type="text/javascript">
-  window.onload = InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html');
+  //window.onload = InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html');
+
+  $(document).ready(function() {
+    InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html');
+  });
 </script>
