@@ -1,0 +1,5 @@
+function InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery(targetClassName, url) 
+{
+  // $(".ContentFrameForHTMLFiles").load(url);
+  $("." + targetClassName).load(url);
+}
