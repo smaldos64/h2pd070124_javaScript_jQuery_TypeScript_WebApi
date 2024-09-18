@@ -1,13 +1,15 @@
-@BackgroundColor: black;
+@BackgroundColor: #00FF00;
 @FontSize_Basic: 15px;
 
 body {
     margin: 0;
-    background-color: @BackgroundColor + #FF00FF;
+    background-color: @BackgroundColor + #FF0000;
   }
   
-  ul.topnav
+  ul
   {
+    &.topnav
+    {
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -16,7 +18,8 @@ body {
         li 
         {
             float: left;
-            a {
+            a 
+            {
                 display: block;
                 color: white;
                 text-align: center;
@@ -26,16 +29,18 @@ body {
                 {
                     background-color: #111;
                 }
-              }
+            }
+
             a.active
             {
                 background-color: #04AA6D;
             }
+            &.right
+            {
+                float: right;   
+            }
         }
-        li.right 
-        {
-            float: right;
-        }
+    }
 }
   
 @media screen and (max-width: 600px) 
@@ -69,6 +74,7 @@ body {
 }
 
 h2 
-    {
-        .Set-Stuff(2 * @FontSize_Basic, silver);
-    }
+{
+    .Set-Stuff(2 * @FontSize_Basic, silver);
+    // .Set-Stuff();
+}

@@ -3,7 +3,9 @@
 function InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery(targetClassName, url) 
 {
   $("." + targetClassName).load(url);
-  HandleNavigationBar(url);
+  //HandleNavigationBar(url);
+  //HandleNavigationBarNew(url);
+  HandleNavigationBarNew1(url);
 }
 
 function HandleNavigationBar(url) 
@@ -14,6 +16,37 @@ function HandleNavigationBar(url)
     if ($(this).text() + ".html" === url)
     {
       $(this).addClass("active");
+      return false;
+    }
+  });
+}
+
+function HandleNavigationBarNew(url) 
+{
+  $(".navbar-nav li a").removeClass("active");
+  
+  $(".navbar-nav li a").each(function() {
+    if ($(this).text() + ".html" === url)
+    {
+      $(this).addClass("active");
+      return false;
+    }
+  });
+}
+
+function HandleNavigationBarNew1(url) 
+{
+  $(".topnav a").removeClass("active");
+  $(".dropdown").removeClass("MenuCurrentItemParent");
+  
+  $(".topnav a").each(function() {
+    if ($(this).text() + ".html" === url)
+    {
+      $(this).addClass("active");
+      if ($(this).parent().hasClass("dropdown-content"))
+      {
+        $(this).parent().parent().addClass("MenuCurrentItemParent");
+      }
       return false;
     }
   });
