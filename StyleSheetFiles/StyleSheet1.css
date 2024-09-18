@@ -124,3 +124,15 @@ body
     font-weight: bold;
     font-style: italic;
 }
+
+h2.test 
+{
+    background-color: blue;
+    color : white;
+}
+
+h2 .test
+{
+    background-color: green;
+    color : white;
+}
