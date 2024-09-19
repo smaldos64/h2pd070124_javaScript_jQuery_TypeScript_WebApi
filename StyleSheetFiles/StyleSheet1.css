@@ -20,12 +20,7 @@ body
     font-size: 17px;
   }
   
-  /* Add an active class to highlight the current page */
-  .active {
-    background-color: #04AA6D;
-    color: white;
-  }
-  
+    
   /* Hide the link that should open and close the topnav on small screens */
   .topnav .icon {
     display: none;
@@ -119,8 +114,16 @@ body
     }
   }
 
-  .MenuCurrentItemParent {
-    background-color: red;
+/* Egne StyleSheet regler herunder !!! */
+/* Add an active class to highlight the current page */
+.active 
+{
+    background-color: #04AA6D;
+    color: white;
+}
+
+.MenuCurrentItemParent {
+    background-color: orange;
     font-weight: bold;
     font-style: italic;
 }

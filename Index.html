@@ -12,16 +12,10 @@
   
   <script src="javaScriptFiles/javaScriptFunctions.js"></script>
   <script src="jQueryFiles/jQueryFunctions"></script>
-  <link rel="stylesheet" href="StyleSheetFiles/Stylesheet1.css"/>
+  <link rel="stylesheet" href="StyleSheetFiles/StylesheetLess1.css"/>
 </head>
 
 <body>
-    <!-- <ul class="topnav">
-      <li><a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html'); return false">Home</a></li> 
-      <li><a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html'); return false">javaScriptDemo</a></li> 
-      <li><a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'jQueryDemo.html'); return false">jQueryDemo</a></li> 
-    </ul> -->
-  
   <div class="topnav" id="myTopnav">
     <a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html'); return false">Home</a>
   
@@ -53,10 +47,13 @@
       </button>
       <div class="dropdown-content">
         <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
         <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'ShowCSS_Properties.html'); return false">ShowCSS_Properties</a>
+        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'ShowCSS_Properties2.html'); return false">ShowCSS_Properties2</a>
       </div>
+
     </div>
+
+    <a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'h1pd070124.html'); return false">h1pd070124</a>
    
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
   </div>
@@ -82,7 +79,8 @@
     if (x.className === "topnav") 
     {
       x.className += " responsive";
-    } else 
+    } 
+    else 
     {
       x.className = "topnav";
     }
