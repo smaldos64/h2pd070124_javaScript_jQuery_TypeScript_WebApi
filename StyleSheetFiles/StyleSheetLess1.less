@@ -1,10 +1,11 @@
-@BackgroundColor: hsl(0, 0%, 100%);
+// @BackgroundColor: hsl(0, 0%, 100%);
+@BackgroundColor: #FFFFFF;
 @FontSize_Basic: 17px;
 
 body 
 {
     margin: 0;
-    background-color: @BackgroundColor - #0000FF;
+    background-color: @BackgroundColor  - #0000FF;
 }
 
 /* Style the links inside the navigation bar */
@@ -30,6 +31,15 @@ body
     {
         display: none;
     }
+
+    /* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, at baggrundsfarven
+       på et item skifter farve, når blot man kører henover det. */
+    // a:hover,
+    // .dropdown:hover .dropbtn
+    // {
+    //     background-color: #000FFF;  /* Baggrundsfarve på valgt item uanset om der er valgt et topmenu item eller dropdown item. */
+    //     color: white;
+    // }
 }
   
   
@@ -79,37 +89,10 @@ body
         display: block;
         text-align: left;
     }
-}
-  
-  
-/* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, at baggrundsfarven
-   på et item skifter farve, når blot man kører henover det. */
-/* Add a dark background on topnav links and the dropdown button on hover */
-// .topnav 
-// {
-//     a:hover,
-//     .dropdown:hover .dropbtn
-//     {
-//         background-color: #FFF;  /* Baggrundsfarve på valgt item uanset om der er valgt et topmenu item eller dropdown item. */
-//         color: white;
-//     }
-// }
 
-/* Show the dropdown menu when the user moves the mouse over the dropdown button */
-// .dropdown:hover 
-//  {
-//     .dropdown-content
-//     {
-//         display: block;
-//     }
-// }
-
-
-/* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, at baggrundsfarven
-   på et item i en dropdown liste skifter farve, når blot man kører henover det. */
-/* Add a grey background to dropdown links on hover */
-.dropdown-content
-{
+    /* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, 
+       at baggrundsfarven på et item i en dropdown liste skifter farve, når blot man kører henover det. */
+    /* Add a grey background to dropdown links on hover */
     a:hover 
     {
         background-color: #ddd;
@@ -117,10 +100,10 @@ body
     }
 }
 
-  
-  /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-  @media screen and (max-width: 600px)
-  {
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px)
+{
     .topnav 
     {
         a:not(:first-child), 
@@ -137,10 +120,10 @@ body
     }
 }
   
-  /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. 
-     This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
-  @media screen and (max-width: 600px)
-  {
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. 
+   This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px)
+{
     .topnav
     {
         &.responsive 
@@ -191,7 +174,7 @@ body
 }
 
 .MenuCurrentItemParent {
-    background-color: orange;
+    background-color: red;
     font-weight: bold;
     font-style: italic;
 }
@@ -205,7 +188,8 @@ body
     {
         background-color: orange;
         color : white;   
-        font-size: 2 * @FontSize_Basic; 
+        font-size: 1 * @FontSize_Basic; 
+        font-style: normal;
     }
 }
 
@@ -214,7 +198,7 @@ h2
     /* Svarer til en "ren" <h2> tag */
     background-color: lightblue;
     color : white;
-    font-size: 2.5 * @FontSize_Basic; 
+    font-size: 1.5 * @FontSize_Basic; 
     font-style: italic;
     
     /* svarer til <h2 class="test"> */
@@ -238,7 +222,7 @@ h2
     background-color: lightgreen;
     color : red;
 
-    /* Svarer til en .test klasse inden i et h2 tag => <h2><div class = "test"> */
+    /* Svarer til et h2 tag inde i en .test klasse <div class = "test"><h2> */
     h2 
     {
         background-color: red;

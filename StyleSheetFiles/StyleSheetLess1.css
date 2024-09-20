@@ -8,6 +8,8 @@ body {
   overflow: hidden;
   /* Style the links inside the dropdown */
   /* Hide the link that should open and close the topnav on small screens */
+  /* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, at baggrundsfarven
+       på et item skifter farve, når blot man kører henover det. */
 }
 .topnav a {
   float: left;
@@ -50,6 +52,9 @@ body {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   /* Style the links inside the dropdown */
+  /* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, 
+       at baggrundsfarven på et item i en dropdown liste skifter farve, når blot man kører henover det. */
+  /* Add a grey background to dropdown links on hover */
 }
 .dropdown-content a {
   float: none;
@@ -59,13 +64,6 @@ body {
   display: block;
   text-align: left;
 }
-/* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, at baggrundsfarven
-   på et item skifter farve, når blot man kører henover det. */
-/* Add a dark background on topnav links and the dropdown button on hover */
-/* Show the dropdown menu when the user moves the mouse over the dropdown button */
-/* Overvej om CSS reglen herunder skal medtages. Personligt synes jeg, at det bliver lidt forvirrende, at baggrundsfarven
-   på et item i en dropdown liste skifter farve, når blot man kører henover det. */
-/* Add a grey background to dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #ddd;
   color: black;
@@ -82,7 +80,7 @@ body {
   }
 }
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. 
-     This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+   This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
 @media screen and (max-width: 600px) {
   .topnav.responsive {
     position: relative;
@@ -116,7 +114,7 @@ body {
   color: white;
 }
 .MenuCurrentItemParent {
-  background-color: orange;
+  background-color: red;
   font-weight: bold;
   font-style: italic;
 }
@@ -127,13 +125,14 @@ body {
 #BackgroundColorForIdControl h2 {
   background-color: orange;
   color: white;
-  font-size: 34px;
+  font-size: 17px;
+  font-style: normal;
 }
 h2 {
   /* Svarer til en "ren" <h2> tag */
   background-color: lightblue;
   color: white;
-  font-size: 42.5px;
+  font-size: 25.5px;
   font-style: italic;
   /* svarer til <h2 class="test"> */
   /* svarer til <h2> <div class="test"> */
@@ -150,7 +149,7 @@ h2 .test {
   /* Svarer til en "ren" .test klasse */
   background-color: lightgreen;
   color: red;
-  /* Svarer til en .test klasse inden i et h2 tag => <h2><div class = "test"> */
+  /* Svarer til et h2 tag inde i en .test klasse <div class = "test"><h2> */
   /* Erklæringen herunder kan ikke lade sig gøre i praksis rent HTML mæssigt set. 
        Se også i den genererede *.css fil for en bedre forståelse herfor. Erklæringen her 
        giver i den tilhørende CSS fil en erklæring som: .testh2 */
