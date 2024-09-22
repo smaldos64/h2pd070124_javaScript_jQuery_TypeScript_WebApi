@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #ffff00;
+  background-color: #FFFFFF;
 }
 /* Style the links inside the navigation bar */
 .topnav {
@@ -132,7 +132,7 @@ h2 {
   /* Svarer til en "ren" <h2> tag */
   background-color: lightblue;
   color: white;
-  font-size: 25.5px;
+  font-size: 34px;
   font-style: italic;
   /* svarer til <h2 class="test"> */
   /* svarer til <h2> <div class="test"> */
@@ -194,5 +194,12 @@ h2 .test {
 .test3.test2 {
   background-color: blue;
   color: magenta;
+}
+.Hide {
+  visibility: hidden;
+}
+.None {
+  height: auto;
+  display: none;
 }
 /*# sourceMappingURL=./StyleSheetLess1.css.map */

@@ -5,14 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bootstrap Site</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="node_modules/jquery/dist/jquery.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script> 
   
-  <script src="javaScriptFiles/javaScriptFunctions.js"></script>
-  <script src="jQueryFiles/jQueryFunctions"></script>
-  <link rel="stylesheet" href="StyleSheetFiles/StyleSheetLess1.css"/>
+  <script src="../javaScriptFiles/javaScriptFunctions.js"></script>
+  <script src="../javaScriptFiles/JavaScriptBindingDynamic.js"></script>
+  <script src="../jQueryFiles/jQueryFunctions.js"></script>
+  <script src="../jQueryFiles/jQueryBindingDynamic.js"></script>
+  <link rel="stylesheet" href="../StyleSheetFiles/StyleSheetLess1.css"/>
 </head>
 
 <body>
@@ -25,8 +29,8 @@
       </button>
       <div class="dropdown-content">
         <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
         <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html'); return false">javaScriptDemo</a>
+        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/javaScriptPages/javaScriptBindingDynamic.html'); return false">javaScriptBindingDynamic</a>
       </div>
     </div>
 
@@ -36,8 +40,9 @@
       </button>
       <div class="dropdown-content">
         <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
         <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'jQueryDemo.html'); return false">jQueryDemo</a>
+        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic.html'); return false">jQueryBindingDynamic</a>
+        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'jQueryBindingDynamicMain.html'); return false">jQueryBindingDynamicMain</a>
       </div>
     </div>
 
