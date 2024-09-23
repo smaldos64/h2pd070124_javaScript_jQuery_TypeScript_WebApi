@@ -48,7 +48,6 @@ $(document).on("click", ".ContentFrameForHTMLFiles [id^='btnEditDynamic']", func
 });
 
 $(document).on("click", ".ContentFrameForHTMLFiles [id^='btnDeleteDynamic']", function(e) {
-//$(".ButtonsAdded").on("click", '[id^="btnDeleteDynamic"]', function(e) {
     var DeleteResult = confirm("Do you really wish to delete : " + $(this).val())
     if (DeleteResult) {
         EditItemHere = $(this).parent().prev().find("input[type='button']");
@@ -57,7 +56,7 @@ $(document).on("click", ".ContentFrameForHTMLFiles [id^='btnDeleteDynamic']", fu
             $("#txtEditItem").val("");
             $(".EditItem").addClass("None");
         }
-        
+
         $(this).closest("tr").remove();
         if (1 == $("#DataTable tr").length) {
             ButtonAddedClass.addClass("None");
