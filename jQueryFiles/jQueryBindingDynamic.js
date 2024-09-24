@@ -17,13 +17,13 @@ $(document).on("click", ".ContentFrameForHTMLFiles #btnAddNewButton", function()
     var WorkStringCell1 = "<td>" + WorkString1 + "</td>";
 
     var WorkString2 = "<input id='btnEditDynamic" + ButtonAddedCounter + "' ";
-    WorkString2 += "value='btnEditDynamic" + ButtonAddedCounter + "' ";
+    WorkString2 += "value='btnEditDynamic_" + ButtonAddedCounter + "' ";
     WorkString2 += "type='button'";
     WorkString2 += " />";
     var WorkStringCell2 = "<td>" + WorkString2 + "</td>";
 
     var WorkString3 = "<input id='btnDeleteDynamic" + ButtonAddedCounter + "' ";
-    WorkString3 += "value='btnDeleteDynamic" + ButtonAddedCounter + "' ";
+    WorkString3 += "value='btnDeleteDynamic_" + ButtonAddedCounter + "' ";
     WorkString3 += "type='button'";
     WorkString3 += " />";
     var WorkStringCell3 = "<td>" + WorkString3 + "</td>";
@@ -34,11 +34,6 @@ $(document).on("click", ".ContentFrameForHTMLFiles #btnAddNewButton", function()
     
     ButtonAddedClass.removeClass("None");
 });
-
-function jQueryCalculateWidthOnControl(Control_Object) {
-    ControlWidth = Control_Object.val().length;
-    return (ControlWidth * 9 + 25);
-}
 
 $(document).on("click", ".ContentFrameForHTMLFiles [id^='btnEditDynamic']", function(e) {
     CurrentEditItem = $(this);
@@ -72,5 +67,10 @@ $(document).on("input", ".ContentFrameForHTMLFiles #txtEditItem", function() {
     var SubString = EditString.substring(EditString.indexOf('_') + 1);
     var DeleteString = CurrentDeleteItem.val().substring(0, CurrentDeleteItem.val().indexOf('_'));
     CurrentDeleteItem.val(DeleteString + "_" + SubString);
-    $("#txtEditItem").width(CalculateWidthOnControl($("#txtEditItem")));
+    $("#txtEditItem").width(jQueryCalculateWidthOnControl($("#txtEditItem")));
 });
+
+function jQueryCalculateWidthOnControl(Control_Object) {
+    ControlWidth = Control_Object.val().length;
+    return (ControlWidth * 9 + 25);
+}

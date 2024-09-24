@@ -36,9 +36,7 @@
 <script type="text/javaScript">
 $(document).ready(function () {
     var ButtonAddedCounter = 0;
-    var CurrentButton;
-
-    var txtButtonContext = $("#txtButtonContext1");
+    
     var ButtonAddedClass = $(".ButtonsAdded1");
 
     var CurrentEditItem;
@@ -46,6 +44,7 @@ $(document).ready(function () {
 
    // $("#btnAddNewButton1").click(function () {
     $("#btnAddNewButton1").on('click', function () {
+        debugger;
         ButtonAddedCounter++;
 
         var WorkStringCell0 = "<td>" + ButtonAddedCounter + "</td>";
@@ -77,6 +76,7 @@ $(document).ready(function () {
     });
 
     $(".ButtonsAdded1").on("click", '[id^="btnEditDynamic"]', function(e) {
+        debugger;
         CurrentEditItem = $(this);
         CurrentDeleteItem = CurrentEditItem.parent().next().find("input[type='button']");
         $("#txtEditItem1").val($(this).val());
@@ -84,6 +84,7 @@ $(document).ready(function () {
     });
 
     $(".ButtonsAdded1").on("click", '[id^="btnDeleteDynamic"]', function(e) {
+        debugger;
         var DeleteResult = confirm("Do you really wish to delete : " + $(this).val())
         if (DeleteResult) 
         {
@@ -102,15 +103,17 @@ $(document).ready(function () {
     });
 
     $("#txtEditItem1").on("input", function() {
+        debugger;
         CurrentEditItem.val($("#txtEditItem1").val());
         var EditString = CurrentEditItem.val();
         var SubString = EditString.substring(EditString.indexOf('_') + 1);
         var DeleteString = CurrentDeleteItem.val().substring(0, CurrentDeleteItem.val().indexOf('_'));
         CurrentDeleteItem.val(DeleteString + "_" + SubString);
-        $("#txtEditItem1").width(CalculateWidthOnControl($("#txtEditItem1")));
+        $("#txtEditItem1").width(jQueryCalculateWidthOnControl($("#txtEditItem1")));
     });
 
-    function CalculateWidthOnControl(Control_Object) {
+    function jQueryCalculateWidthOnControl(Control_Object) {
+        debugger;
         ControlWidth = Control_Object.val().length;
         return (ControlWidth * 9 + 25);
     }
