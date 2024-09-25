@@ -6,17 +6,20 @@ function InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery(targetClassName, 
 
 function HandleNavigationBarNew1(url) 
 {
-  $(".topnav a").removeClass("active");
+  $(".navbar-nav a").removeClass("active");
   $(".dropdown").removeClass("MenuCurrentItemParent");
+  //$(".dropdown-menu").removeClass("MenuCurrentItemParent");
   
-  $(".topnav a").each(function() {
+  $(".navbar-nav a").each(function() {
 
     if ($(this).text() + ".html" === RemovePathFromFileName(url))
     {
       $(this).addClass("active");
-      if ($(this).parent().hasClass("dropdown-content"))
+      //if ($(this).parent().hasClass("dropdown-content"))
+      if ($(this).parent().parent().hasClass("dropdown-menu"))
       {
-        $(this).parent().parent().addClass("MenuCurrentItemParent");
+        $(this).parent().parent().parent().addClass("MenuCurrentItemParent");
+        //$(this).prev(".dropdown").addClass("MenuCurrentItemParent");
       }
       return false;
     }
