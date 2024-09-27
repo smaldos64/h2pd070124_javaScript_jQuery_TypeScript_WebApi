@@ -101,4 +101,14 @@ h2 .test {
   height: auto;
   display: none;
 }
+.MyMargin {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.DontShowControl {
+  display: none;
+}
+.ShowControl {
+  display: block;
+}
 /*# sourceMappingURL=./StyleSheetLess1.css.map */

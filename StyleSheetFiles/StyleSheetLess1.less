@@ -1,6 +1,7 @@
 // @BackgroundColor: hsl(0, 0%, 100%);
 @BackgroundColor: #FFFFFF;
 @FontSize_Basic: 17px;
+@Margin: 20px;
 
 body 
 {
@@ -136,7 +137,6 @@ h2
     }
 }
 
-
 .Hide 
 {
     visibility: hidden;
@@ -146,4 +146,20 @@ h2
 {
     height: auto;
     display: none;
+}
+
+.MyMargin 
+{
+    margin-left: @Margin;
+    margin-right: @Margin;
+}
+
+.DontShowControl
+{
+    display: none;
+}
+
+.ShowControl
+{
+    display: block;
 }
