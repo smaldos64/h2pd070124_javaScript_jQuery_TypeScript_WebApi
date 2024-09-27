@@ -20,6 +20,7 @@
   <script src="../jQueryFiles/jQueryFunctions.js"></script>
   <script src="../jQueryFiles/jQueryBindingDynamic.js"></script>
   <script src="../TypeScriptFiles/HandleStudents.js"></script>
+  <script src="../javaScriptFiles/TodoItemsWebApi.js" asp-append-version="true"></script>
   <link rel="stylesheet" href="../StyleSheetFiles/StyleSheetLess1.css"/>
 </head>
 
@@ -85,6 +86,28 @@
             </ul>
           </li>
 
+          <li class="nav-item dropdown"></li>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              TypeScript
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/TypeScriptPages/HandleStudents.html'); return false">HandleStudents</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Web Api
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/WebApiPages/TodoItemsWebApi.html'); return false">TodoItemsWebApi</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'h1pd070124.html'); return false">h1pd070124</a>
           </li>
@@ -106,56 +129,9 @@
     </div>
   </nav>
 
-  <!-- <div class="topnav" id="mytopnav">
-    <a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html'); return false">Home</a>
-  
-    <div class="dropdown">
-      <button class="dropbtn">javaScript
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/javaScriptPages/javaScriptDemo.html'); return false">javaScriptDemo</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/javaScriptPages/javaScriptBindingDynamic.html'); return false">javaScriptBindingDynamic</a>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button class="dropbtn">jQuery
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryDemo.html'); return false">jQueryDemo</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic.html'); return false">jQueryBindingDynamic</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic1.html'); return false">jQueryBindingDynamic1</a>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button class="dropbtn">CSS
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/CSS_Pages/ShowCSS_Properties.html'); return false">ShowCSS_Properties</a>
-        <a class="" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/CSS_Pages/ShowCSS_Properties2.html'); return false">ShowCSS_Properties2</a>
-      </div>
-
-    </div>
-
-    <a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'h1pd070124.html'); return false">h1pd070124</a>
-
-    <a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'h2pd070124.html'); return false">h2pd070124</a>
-
-    <a class="active" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic.html'); return false">jQueryBindingDynamic</a>
-   
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-  </div> -->
-
-    <div class="ContentFrameForHTMLFiles">
-      <h2>Test it</h2>
-    </div>
+  <div class="ContentFrameForHTMLFiles MyMargin">
+    <h2>Test it</h2>
+  </div>
     
 </body>
     
