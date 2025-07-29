@@ -99,7 +99,7 @@ class Student {
     }
 
     public toString(): string {
-        return ("Student med ID : " + this._studentId + " og navn : " + this._studentName + " er " + this._studentAge + " år gammel !!! ");
+        return ("Student med ID : " + this._studentId + " og navn : " + this._studentName + " er " + this._studentAge + " år gammmmel !!! ");
     }
 }
 

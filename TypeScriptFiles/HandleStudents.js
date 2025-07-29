@@ -90,7 +90,7 @@ var Student = /** @class */ (function () {
         return (Student1 + Student2);
     };
     Student.prototype.toString = function () {
-        return ("Student med ID : " + this._studentId + " og navn : " + this._studentName + " er " + this._studentAge + " år gammel !!! ");
+        return ("Student med ID : " + this._studentId + " og navn : " + this._studentName + " er " + this._studentAge + " år gammmmel !!! ");
     };
     Student._numberOfObjectCreatedOnClass = 0;
     Student._nextStudentIdNumber = 0;
@@ -122,21 +122,6 @@ function DeleteStudentObject(StudentId) {
     }
 }
 $(document).ready(function () {
-    // btnClearTextFields = $("#btnClearTextFields");
-    // btnAddNewStudent = $("#btnAddNewStudent");
-    // studentTableId = $("#StudentData");
-    // txtStudentName = $("#txtStudentName");
-    // txtStudentAge = $("#txtStudentAge");
-    // btnEditStudent = $("#btnEditStudent");
-    // btnSkipEditStudent = $("#btnSkipEditStudent");
-    // StudentDataRows = $(".StudentDataRows");
-    // TypeScriptDemo = $("#TypeScriptDemo");
-    // NumberOfObjectsOnClass = $("#NumberOfObjectsOnClass");
-    // btnTypeScriptFunctionOverloadDemo = $("#btnTypeScriptFunctionOverloadDemo");
-    // TestFunctionOverload = $("#TestFunctionOverload");
-    // txtStudentAdd1 = $("#txtStudentAdd1");
-    // txtStudentAdd2 = $("#txtStudentAdd2");
-    //SpecifyNumberOfObjectsOnClass();
     function SpecifyNumberOfObjectsOnClass() {
         $("#NumberOfObjectsOnClass").text("Antal objekter defineret på klasse er : " + Student.NumberOfObjectCreatedOnClass);
     }
