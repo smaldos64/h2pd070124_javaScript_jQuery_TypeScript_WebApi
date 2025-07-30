@@ -1,0 +1,48 @@
+<h1>JavaScript Classes</h1>
+<p>Creating two car objects from a car class:</p>
+
+<p id="demo"></p>
+
+<p id="demoArray"></p>
+
+<p id="demoArray1"></p>
+
+<script>
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+
+  carAge() {
+    const date = new Date();
+    return (date.getFullYear() - this.year);
+  }
+}
+
+if (IS_DEBUG_MODE) {
+    debugger; // Denne linje vil kun aktiveres, hvis IS_DEBUG_MODE er true
+}
+
+const myCar1 = new Car("Ford", 2014);
+const myCar2 = new Car("Audi", 2019);
+const myCar3 = new Car("Mini Cooper", 2025);
+
+document.getElementById("demo").innerHTML =
+myCar1.name + " " + myCar2.name + " " + myCar3.name;
+
+const CarArray = [];
+
+CarArray[0] = myCar1;
+CarArray[1] = myCar2;
+CarArray[2] = myCar3;
+
+document.getElementById("demoArray").innerHTML = CarArray.map(obj => "name : " + obj.name + " => year : " + obj.year).join("</br>");
+
+for (let counter = 0; counter < CarArray.length; counter++)
+{
+	document.getElementById("demoArray1").innerHTML += "name : " + CarArray[counter].name + " => year : " + CarArray[counter].year + " => alder : " + CarArray[counter].carAge() + " år </br>";
+}
+
+//document.getElementById("demoArray1").innerHTML = CarArray;
+</script>
