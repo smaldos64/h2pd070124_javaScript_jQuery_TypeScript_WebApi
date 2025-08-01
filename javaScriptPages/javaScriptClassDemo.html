@@ -27,193 +27,164 @@
 
 <script type="text/javaScript">
 
-class carTextBoxesEnums {
-    static CarName = new carTextBoxesEnums(document.getElementById("txtCarName"), 0);
-    static CarYear = new carTextBoxesEnums(document.getElementById("txtCarYear"), 1);
-    static CarPrice = new carTextBoxesEnums(document.getElementById("txtCarPrice"), 2);
-    static CarModel = new carTextBoxesEnums(document.getElementById("txtCarModel"), 3);
+const textBoxEmptyString = '';
 
-    constructor(textBox, value)
-    {
-        this.textBox = textBox;
-        this.value = value;
+// class carTextBoxesEnums {
+//     static CarName = new carTextBoxesEnums(document.getElementById("txtCarName"), 0);
+//     static CarYear = new carTextBoxesEnums(document.getElementById("txtCarYear"), 1);
+//     static CarPrice = new carTextBoxesEnums(document.getElementById("txtCarPrice"), 2);
+//     static CarModel = new carTextBoxesEnums(document.getElementById("txtCarModel"), 3);
+
+//     constructor(textBox, value)
+//     {
+//         this.textBox = textBox;
+//         this.value = value;
+//     }
+
+//     toString() {
+//         return (this.textBox.value)
+//     }
+
+//     getValue() {
+//         return (this.value);
+//     }
+// }
+
+class FormField {
+    constructor(id, defaultValue) {
+        this.id = id;
+        this.defaultValue = defaultValue;
     }
 
-    toString() {
-        return (this.textBox.value)
+    getElement() {
+        return document.getElementById(this.id);
     }
 
     getValue() {
-        return (this.value);
+        const element = this.getElement();
+        return element ? element.value : null;
     }
+
+    setValue(value) {
+        const element = this.getElement();
+        if (element) {
+            element.value = value;
+        }
+    }
+
+    clearValue() {
+        this.setValue(textBoxEmptyString);
+    }
+}
+
+class FormFields {
+    static CarName = new FormField('txtCarName', 'Indtast Car Navn');
+    static CarYear = new FormField('txtCarYear', 'Indtast Car Year');
+    static CarPrice = new FormField('txtCarPrice', 'Indtast Car Price');
+    static CarModel = new FormField('txtCarModel', 'Indtast Car Model');
+
+    static AllFields = Object.values(FormFields);
 }
 
 class Car {
   static numberOfObjectsDefinedOnClass = 0;
 
-  constructor(name, year, price) {
-    this.name = name;
-    this.year = year;
-    this.price = price;
+  constructor(formData) {
+    this.carName = formData.carName;
+    this.carYear = formData.carYear;
+    this.carPrice = formData.carPrice;
     Car.numberOfObjectsDefinedOnClass++;
   }
 
   carAge() {
     const date = new Date();
-    return (date.getFullYear() - this.year);
+    return (date.getFullYear() - this.carYear);
   }
   
-  present() {
-    return ('I have a ' + this.carname);
-  }
-
   toString() {
-    return ("name : " + this.name + " => year : " + this.year + " => alder : " + this.carAge() + " år");
+    return ("name : " + this.carName + " => year : " + this.carYear + " => alder : " + this.carAge() + " år => pris : " + this.carPrice + "kr" );
   }
 }
 
 class CarModel extends Car {
-  constructor(name, year, price, mod) {
-    super(name, year, price);
-    this.model = mod;
-    CarModel.numberOfObjectsDefinedOnClass++;
-  }
+    static numberOfObjectsDefinedOnClass = 0;
+
+    constructor(formData) {
+        super(formData);
+        this.carModel = formData.carModel;
+        CarModel.numberOfObjectsDefinedOnClass++;
+    }
   
-  show() {
-    return (this.present() + ', it is a ' + this.model + " . It is " + this.carAge() + " years old.");
-  }
-  
-  toString() {
-    //return ("${super.toString()} Model:" + this.model);
-    return (super.toString() + " => Model : " + this.model);
-  }
+    toString() {
+        return (super.toString() + " => Model : " + this.carModel);
+    }
 }
-
-if (Older_Code_Implemented)
-{
-    const carTextBoxes = [];
-
-    carTextBoxes.push(document.getElementById("txtCarName"));
-    carTextBoxes.push(document.getElementById("txtCarYear"));
-    carTextBoxes.push(document.getElementById("txtCarPrice"));
-    carTextBoxes.push(document.getElementById("txtCarModel"));
-    var carTextBoxesIndexCheck = carTextBoxes.length - 1;
-}
-
-const textBoxEmptyString '';
-const carTextBoxes = Object.values(carTextBoxesEnums);
-const carTextBoxesIndexCheck = carTextBoxesArray[carTextBoxesArray.length - 1].value;
-
 
 if (IS_DEBUG_MODE) {
     debugger; // Denne linje vil kun aktiveres, hvis IS_DEBUG_MODE er true. Indstillingen af IS_DEBUG_MODE ændres i Settings.js
 }
 
-// const myCar1 = new Car("Ford", 2014);
-// const myCar2 = new Car("Audi", 2019);
-// const myCar3 = new Car("Mini Cooper", 2025);
-
-// document.getElementById("demo").innerHTML =
-// myCar1.name + " " + myCar2.name + " " + myCar3.name;
-
 const CarArray = [];
 
-// CarArray[0] = myCar1;
-// CarArray[1] = myCar2;
-// CarArray[2] = myCar3;
-
-// document.getElementById("demoArray").innerHTML = CarArray.map(obj => "name : " + obj.name + " => year : " + obj.year).join("</br>");
-
-// for (let counter = 0; counter < CarArray.length; counter++)
-// {
-// 	document.getElementById("demoArray1").innerHTML += "name : " + CarArray[counter].name + " => year : " + CarArray[counter].year + " => alder : " + CarArray[counter].carAge() + " år </br>";
-// }
-
-// for (let counter = 0; counter < CarArray.length; counter++)
-// {
-// 	document.getElementById("demoArray2").innerHTML += CarArray[counter];
-// }
-//
-
 document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
-
-function ClearTextFields() {
-    if (Older_Code_Implemented)
-    {
-        carTextBoxes.forEach((element, index) => 
-        {
-            carTextBoxes[index].value = textBoxEmptyString;
-        });
-    }
-    else 
-    {
-        carTextBoxes.forEach((element, index) => 
-        {
-            carTextBoxes[index].textBox.value = textBoxEmptyString;
-        });
-    }
-}
-
-function CheckTextBoxContentAtIndex(index)
-{
-    if (textBoxEmptyString === carTextBoxes[index].value) 
-    {
-        return (false);    
-    }
-    else 
-    {
-        return (true);
-    }
-}
-
-function CheckTextBoxesForContent()
-{
-    for (index = 0; index < carTextBoxes.length; index++)
-    {
-        if (!CheckTextBoxContentAtIndex(index) && index != carTextBoxesIndexCheck)   
-        {
-            console.log("Element at index ${index} er en tom string.");
-            return (false);
-        }    
-    }
-    return (true);
-}
+document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarMoel objekter defineret : " + CarModel.numberOfObjectsDefinedOnClass;
 
 function AddNewCarOrCarModel()
 {
-    if (CheckTextBoxesForContent())
-    {
-        if (CheckTextBoxContentAtIndex(carTextBoxesIndexCheck))
-        {
-            const carModelToAdd = new CarModel(carTextBoxes[0].value,
-                                               carTextBoxes[1].value,
-                                               carTextBoxes[2].value);
+    const allFields = FormFields.AllFields;
 
-            CarArray.push(carModelToAdd);
-        }
-        else 
-        {
-            if (Older_Code_Implemented)
-            {
-                const carToAdd = new Car(carTextBoxes[0].value,
-                                        carTextBoxes[1].value);
-            }
-            const carToAdd = new Car(carTextBoxes[carTextBoxesEnums.CarName].value,
-                                     carTextBoxes[carTextBoxesEnums.CarYear].value,
-                                     carTextBoxes[carTextBoxesEnums.CarPrice].value);                         
-            CarArray.push(carToAdd);
-            document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter : " + Car.numberOfObjectsDefinedOnClass;
-        }
+    // 1. Isoler felterne der skal valideres (alle på nær det sidste)
+    const fieldsToValidate = allFields.slice(0, -1);
 
-        document.getElementById("demoArray").innerHTML = "";
-        for (let index = 0; index < CarArray.length; index++)
-        {
-	        document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
+    // 2. Tjek om alle de isolerede felter er udfyldt
+    const allRequiredFieldsAreFilled = fieldsToValidate.every(field => field.getValue().trim() !== textBoxEmptyString);
+
+    // Hvis ikke alle de første felter er udfyldt, afbryd og vis fejl
+    if (!allRequiredFieldsAreFilled) {
+        alert("Fejl: Alle felter på nær det sidste skal udfyldes.");
+        
+        // Find det første ugyldige felt og sæt fokus på det
+        const firstInvalidField = fieldsToValidate.find(field => field.getValue().trim() === textBoxEmptyString);
+        if (firstInvalidField) {
+            firstInvalidField.getElement().style.border = '2px solid red';
+            firstInvalidField.getElement().focus();
         }
+        return;
     }
-    else 
+
+    // Hvis de påkrævede felter er udfyldt, fortsæt med det sidste felt
+    const lastField = allFields[allFields.length - 1];
+    const lastFieldValue = lastField.getValue().trim();
+
+    let formDataObject;
+    let carToAdd
+
+    // 3. Tjek det sidste felts indhold og kald den relevante funktion
+    if (lastFieldValue === textBoxEmptyString) {
+        formDataObject = {
+            carName: FormFields.CarName.getValue(),
+            carYear: FormFields.CarYear.getValue(),
+            carPrice: FormFields.CarPrice.getValue()
+        };
+        carToAdd = new Car(formDataObject);
+        document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
+    } else 
     {
-        alert("Alle tekstbokse skal have indhold !!!");
+        formDataObject = {
+            carName: FormFields.CarName.getValue(),
+            carYear: FormFields.CarYear.getValue(),
+            carPrice: FormFields.CarPrice.getValue(),
+            carModel: FormFields.CarModel.getValue()
+        };
+        carToAdd = new CarModel(formDataObject);
+        document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
+        document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfObjectsDefinedOnClass;
+    }
+    CarArray.push(carToAdd);
+    document.getElementById("demoArray").innerHTML = "";
+    for (let index = 0; index < CarArray.length; index++)
+    {
+        document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
     }
 }
 </script>
