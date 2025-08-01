@@ -1,5 +1,18 @@
 <h1>JavaScript Classes</h1>
-<p>Creating two car objects from a car class:</p>
+<p>Creating car and carModel objects from a car and a CarModel class:</p>
+
+<input id="btnClearTextFields" type="button" value="Slet Tekstfelter" onclick="ClearTextFields()"/>
+<input id="btnAddNewStudent" type="button" value="Tilføj Car eller Car Model" onclick="AddNewCarOrCarModel()"/>
+<hr />
+<input type="text" id="txtCarName" placeholder="Car Navn">
+<input type="text" id="txtCarYear" placeholder="Car Year">
+<input type="text" id="txtCarPrice" placeholder="Car Price">
+<input type="text" id="txtCarModel" placeholder="Car Model">
+
+<hr />
+
+<br />
+<br />
 
 <p id="demo"></p>
 
@@ -7,42 +20,199 @@
 
 <p id="demoArray1"></p>
 
-<script>
+<p id="demoArray2"></p>
+
+<p id="numberOfCarObjects"></p>
+<p id="numberOfCarModelObjects"></p>
+
+<script type="text/javaScript">
+
+class carTextBoxesEnums {
+    static CarName = new carTextBoxesEnums(document.getElementById("txtCarName"), 0);
+    static CarYear = new carTextBoxesEnums(document.getElementById("txtCarYear"), 1);
+    static CarPrice = new carTextBoxesEnums(document.getElementById("txtCarPrice"), 2);
+    static CarModel = new carTextBoxesEnums(document.getElementById("txtCarModel"), 3);
+
+    constructor(textBox, value)
+    {
+        this.textBox = textBox;
+        this.value = value;
+    }
+
+    toString() {
+        return (this.textBox.value)
+    }
+
+    getValue() {
+        return (this.value);
+    }
+}
+
 class Car {
-  constructor(name, year) {
+  static numberOfObjectsDefinedOnClass = 0;
+
+  constructor(name, year, price) {
     this.name = name;
     this.year = year;
+    this.price = price;
+    Car.numberOfObjectsDefinedOnClass++;
   }
 
   carAge() {
     const date = new Date();
     return (date.getFullYear() - this.year);
   }
+  
+  present() {
+    return ('I have a ' + this.carname);
+  }
+
+  toString() {
+    return ("name : " + this.name + " => year : " + this.year + " => alder : " + this.carAge() + " år");
+  }
 }
+
+class CarModel extends Car {
+  constructor(name, year, price, mod) {
+    super(name, year, price);
+    this.model = mod;
+    CarModel.numberOfObjectsDefinedOnClass++;
+  }
+  
+  show() {
+    return (this.present() + ', it is a ' + this.model + " . It is " + this.carAge() + " years old.");
+  }
+  
+  toString() {
+    //return ("${super.toString()} Model:" + this.model);
+    return (super.toString() + " => Model : " + this.model);
+  }
+}
+
+if (Older_Code_Implemented)
+{
+    const carTextBoxes = [];
+
+    carTextBoxes.push(document.getElementById("txtCarName"));
+    carTextBoxes.push(document.getElementById("txtCarYear"));
+    carTextBoxes.push(document.getElementById("txtCarPrice"));
+    carTextBoxes.push(document.getElementById("txtCarModel"));
+    var carTextBoxesIndexCheck = carTextBoxes.length - 1;
+}
+
+const textBoxEmptyString '';
+const carTextBoxes = Object.values(carTextBoxesEnums);
+const carTextBoxesIndexCheck = carTextBoxesArray[carTextBoxesArray.length - 1].value;
+
 
 if (IS_DEBUG_MODE) {
-    debugger; // Denne linje vil kun aktiveres, hvis IS_DEBUG_MODE er true
+    debugger; // Denne linje vil kun aktiveres, hvis IS_DEBUG_MODE er true. Indstillingen af IS_DEBUG_MODE ændres i Settings.js
 }
 
-const myCar1 = new Car("Ford", 2014);
-const myCar2 = new Car("Audi", 2019);
-const myCar3 = new Car("Mini Cooper", 2025);
+// const myCar1 = new Car("Ford", 2014);
+// const myCar2 = new Car("Audi", 2019);
+// const myCar3 = new Car("Mini Cooper", 2025);
 
-document.getElementById("demo").innerHTML =
-myCar1.name + " " + myCar2.name + " " + myCar3.name;
+// document.getElementById("demo").innerHTML =
+// myCar1.name + " " + myCar2.name + " " + myCar3.name;
 
 const CarArray = [];
 
-CarArray[0] = myCar1;
-CarArray[1] = myCar2;
-CarArray[2] = myCar3;
+// CarArray[0] = myCar1;
+// CarArray[1] = myCar2;
+// CarArray[2] = myCar3;
 
-document.getElementById("demoArray").innerHTML = CarArray.map(obj => "name : " + obj.name + " => year : " + obj.year).join("</br>");
+// document.getElementById("demoArray").innerHTML = CarArray.map(obj => "name : " + obj.name + " => year : " + obj.year).join("</br>");
 
-for (let counter = 0; counter < CarArray.length; counter++)
-{
-	document.getElementById("demoArray1").innerHTML += "name : " + CarArray[counter].name + " => year : " + CarArray[counter].year + " => alder : " + CarArray[counter].carAge() + " år </br>";
+// for (let counter = 0; counter < CarArray.length; counter++)
+// {
+// 	document.getElementById("demoArray1").innerHTML += "name : " + CarArray[counter].name + " => year : " + CarArray[counter].year + " => alder : " + CarArray[counter].carAge() + " år </br>";
+// }
+
+// for (let counter = 0; counter < CarArray.length; counter++)
+// {
+// 	document.getElementById("demoArray2").innerHTML += CarArray[counter];
+// }
+
+document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
+
+function ClearTextFields() {
+    if (Older_Code_Implemented)
+    {
+        carTextBoxes.forEach((element, index) => 
+        {
+            carTextBoxes[index].value = textBoxEmptyString;
+        });
+    }
+    else 
+    {
+        carTextBoxes.forEach((element, index) => 
+        {
+            carTextBoxes[index].textBox.value = textBoxEmptyString;
+        });
+    }
 }
 
-//document.getElementById("demoArray1").innerHTML = CarArray;
+function CheckTextBoxContentAtIndex(index)
+{
+    if (textBoxEmptyString === carTextBoxes[index].value) 
+    {
+        return (false);    
+    }
+    else 
+    {
+        return (true);
+    }
+}
+
+function CheckTextBoxesForContent()
+{
+    for (index = 0; index < carTextBoxes.length; index++)
+    {
+        if (!CheckTextBoxContentAtIndex(index) && index != carTextBoxesIndexCheck)   
+        {
+            console.log("Element at index ${index} er en tom string.");
+            return (false);
+        }    
+    }
+    return (true);
+}
+
+function AddNewCarOrCarModel()
+{
+    if (CheckTextBoxesForContent())
+    {
+        if (CheckTextBoxContentAtIndex(carTextBoxesIndexCheck))
+        {
+            const carModelToAdd = new CarModel(carTextBoxes[0].value,
+                                               carTextBoxes[1].value,
+                                               carTextBoxes[2].value);
+
+            CarArray.push(carModelToAdd);
+        }
+        else 
+        {
+            if (Older_Code_Implemented)
+            {
+                const carToAdd = new Car(carTextBoxes[0].value,
+                                        carTextBoxes[1].value);
+            }
+            const carToAdd = new Car(carTextBoxes[carTextBoxesEnums.CarName].value,
+                                     carTextBoxes[carTextBoxesEnums.CarYear].value,
+                                     carTextBoxes[carTextBoxesEnums.CarPrice].value);                         
+            CarArray.push(carToAdd);
+            document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter : " + Car.numberOfObjectsDefinedOnClass;
+        }
+
+        document.getElementById("demoArray").innerHTML = "";
+        for (let index = 0; index < CarArray.length; index++)
+        {
+	        document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
+        }
+    }
+    else 
+    {
+        alert("Alle tekstbokse skal have indhold !!!");
+    }
+}
 </script>
