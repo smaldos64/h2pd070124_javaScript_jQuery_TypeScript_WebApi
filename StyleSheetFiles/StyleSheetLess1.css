@@ -114,3 +114,27 @@ h2 .test {
 .TopMargin {
   margin-top: 25px;
 }
+/* ----------------------------------------------------
+   Styling KUN for javaScriptClassDemo.html (ved brug af nesting)
+   ---------------------------------------------------- */
+#responsive-table-view {
+  /* Styling der specifikt kun gælder for dette indhold */
+  padding: 20px;
+  border: 1px solid #ccc;
+  /* Nesting for at målrette tabellen og dens elementer */
+}
+#responsive-table-view .table-responsive {
+  margin-top: 20px;
+}
+#responsive-table-view table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#responsive-table-view th,
+#responsive-table-view td {
+  padding: 8px;
+  text-align: left;
+}
+#responsive-table-view th {
+  background-color: #f4f4f4;
+}
