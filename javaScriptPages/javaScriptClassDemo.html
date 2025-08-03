@@ -269,6 +269,7 @@ function AddNewCarOrCarModel(event)
                 tableEditingRow.cells[4].textContent = existingCar.carModel;
             }
         }
+        UpdateObjectCounterTags();
         resetEditingState();
     } 
     else 
@@ -289,16 +290,17 @@ function AddNewCarOrCarModel(event)
             // document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
             // document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfCarModelObjectsDefinedOnClass;
         }
+        CarArray.push(carToAdd);
         UpdateObjectCounterTags();
         // document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
         // document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfCarModelObjectsDefinedOnClass;
 
-        CarArray.push(carToAdd);
-        document.getElementById("demoArray").innerHTML = "";
-        for (let index = 0; index < CarArray.length; index++)
-        {
-            document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
-        }
+        // CarArray.push(carToAdd);
+        // document.getElementById("demoArray").innerHTML = "";
+        // for (let index = 0; index < CarArray.length; index++)
+        // {
+        //     document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
+        // }
 
         AddDataToTable(carToAdd);
     }
@@ -444,6 +446,12 @@ function resetEditingState()
 
 function UpdateObjectCounterTags()
 {
+    document.getElementById("demoArray").innerHTML = "";
+    for (let index = 0; index < CarArray.length; index++)
+    {
+        document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
+    }
+
     document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
     document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfCarModelObjectsDefinedOnClass;
 }
