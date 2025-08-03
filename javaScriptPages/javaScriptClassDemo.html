@@ -56,6 +56,8 @@ const cancelButton = document.getElementById('cancel-button');
 
 document.getElementById('btnClearTextFields').addEventListener('click', ClearTextFields);
 
+const tableBody = document.getElementById('data-table-body');
+
 const textBoxEmptyString = '';
 const noCarModelString = '     ';
 let tableEditingRow = null; 
@@ -97,19 +99,39 @@ class FormFields {
 }
 
 class Car {
-  static numberOfObjectsDefinedOnClass = 0;
+  static numberOfCarObjectsDefinedOnClass = 0;
 
   constructor(formData) {
     this.carName = formData.carName;
     this.carYear = formData.carYear;
     this.carPrice = formData.carPrice;
-    Car.numberOfObjectsDefinedOnClass++;
+    this.carId = formData.carId;
+    Car.numberOfCarObjectsDefinedOnClass++;
   }
 
   carAge() {
     const date = new Date();
     return (date.getFullYear() - this.carYear);
   }
+
+  copyEditedDataToSpecifiedCarObject(formData)
+  {
+    this.carName = formData.carName;
+    this.carYear = formData.carYear;
+    this.carPrice = formData.carPrice;
+  }
+
+  static decreaseNumberOfCarObjects()
+    {
+        if (Car.numberOfCarObjectsDefinedOnClass > 0)
+        {
+            Car.numberOfCarObjectsDefinedOnClass--;
+        }
+        else 
+        {
+            alert("Vi burde alrdig komme ind her i funktionen decreaseNumberOfCarObjects !!!");
+        }
+    }
   
   toString() {
     return ("name : " + this.carName + " => year : " + this.carYear + " => alder : " + this.carAge() + " år => pris : " + this.carPrice + "kr" );
@@ -117,12 +139,33 @@ class Car {
 }
 
 class CarModel extends Car {
-    static numberOfObjectsDefinedOnClass = 0;
+    static numberOfCarModelObjectsDefinedOnClass = 0;
 
     constructor(formData) {
         super(formData);
         this.carModel = formData.carModel;
-        CarModel.numberOfObjectsDefinedOnClass++;
+        CarModel.numberOfCarModelObjectsDefinedOnClass++;
+    }
+
+    copyEditedDataToSpecifiedCarModelObject(formData)
+    {
+        this.carName = formData.carName;
+        this.carYear = formData.carYear;
+        this.carPrice = formData.carPrice;
+        this.carModel = formData.carModel;
+    }
+
+    static decreaseNumberOfCarModelObjects()
+    {
+        Car.decreaseNumberOfCarObjects();
+        if (CarModel.numberOfCarModelObjectsDefinedOnClass > 0)
+        {
+            CarModel.numberOfCarModelObjectsDefinedOnClass--;
+        }
+        else 
+        {
+            alert("Vi burde alrdig komme ind her i funktionen decreaseNumberOfCarModelObjects !!!");
+        }
     }
   
     toString() {
@@ -135,6 +178,8 @@ if (IS_DEBUG_MODE) {
 }
 
 const CarArray = [];
+let nextCarId = 1;
+let editingCarId = null;
 
 document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
 document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfObjectsDefinedOnClass;
@@ -172,54 +217,114 @@ function AddNewCarOrCarModel(event)
     let formDataObject = {
         carName: FormFields.CarName.getValue(),
         carYear: FormFields.CarYear.getValue(),
-        carPrice: FormFields.CarPrice.getValue()
+        carPrice: FormFields.CarPrice.getValue(),
     };
-    let carToAdd;
 
-    // 3. Tjek det sidste felts indhold og kald den relevante funktion
-    if (lastFieldValue === textBoxEmptyString) {
-        carToAdd = new Car(formDataObject);
-        document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
-    } else 
+    if (editingCarId !== null) {
+        // REDIGERINGS-TILSTAND
+        const carIndex = CarArray.findIndex(car => car.carId === editingCarId);
+        if (carIndex !== -1) 
+        {
+            const existingCar = CarArray[carIndex];
+
+            formDataObject.CarId = editingCarId;
+            
+            if (lastFieldValue && !(existingCar instanceof CarModel)) {
+                // Her gemmer vi det eksisterende CarId og opretter et nyt CarModel objekt med dette CarId
+                // Det gamle objekt på pladsen var et Car objekt.
+                //formDataObject.carModel = FormFields.CarModel.getValue();
+                formDataObject.carModel = lastFieldValue;
+                CarArray[carIndex] = new CarModel(formDataObject);
+                CarModel.decreaseNumberOfCarModelObjects();
+            } else if (!lastFieldValue && existingCar instanceof CarModel) {
+                // Her gemmer vi det eksisterende ID og opretter et nyt Car objekt med dette CarId
+                // Det gamle objekt på pladsen var et CarModel objekt.
+                CarArray[carIndex] = new Car(formDataObject);
+                Car.decreaseNumberOfCarObjects();
+            } else {
+                // existingCar.brand = brandValue;
+                // if (existingCar instanceof CarModel) {
+                //     existingCar.model = modelValue;
+                // }
+                if (existingCar instanceof CarModel)
+                {
+                    formDataObject.carModel = lastFieldValue;
+                    existingCar.copyEditedDataToSpecifiedCarModelObject(formDataObject);
+                }
+                else 
+                {
+                    existingCar.copyEditedDataToSpecifiedCarObject(formDataObject);
+                }
+            }
+
+            const tableEditingRow = tableBody.querySelector(`[data-id='${editingCarId}']`);
+            if (tableEditingRow) {
+                // rowToUpdate.cells[0].textContent = carData[carIndex].brand;
+                // rowToUpdate.cells[1].textContent = carData[carIndex] instanceof CarModel ? carData[carIndex].model : '';
+                // rowToUpdate.cells[2].textContent = carData[carIndex].constructor.name;
+                tableEditingRow.cells[0].textContent = existingCar.carName;
+                tableEditingRow.cells[1].textContent = existingCar.carYear;
+                tableEditingRow.cells[2].textContent = existingCar.carAge();
+                tableEditingRow.cells[3].textContent = existingCar.carPrice;
+                tableEditingRow.cells[4].textContent = existingCar.carModel;
+            }
+        }
+        resetEditingState();
+    } 
+    else 
     {
-        formDataObject.carModel = FormFields.CarModel.getValue();
-        carToAdd = new CarModel(formDataObject);
-        document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfObjectsDefinedOnClass;
-        document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfObjectsDefinedOnClass;
-    }
+        // OPRETTELSES-TILSTAND
+        let carToAdd;
+        formDataObject.carId = nextCarId++;
 
-    CarArray.push(carToAdd);
-    document.getElementById("demoArray").innerHTML = "";
-    for (let index = 0; index < CarArray.length; index++)
-    {
-        document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
-    }
+        // 3. Tjek det sidste felts indhold og kald den relevante funktion
+        if (lastFieldValue === textBoxEmptyString) {
+            carToAdd = new Car(formDataObject);
+            // document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
+        } 
+        else 
+        {
+            formDataObject.carModel = FormFields.CarModel.getValue();
+            carToAdd = new CarModel(formDataObject);
+            // document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
+            // document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfCarModelObjectsDefinedOnClass;
+        }
+        UpdateObjectCounterTags();
+        // document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
+        // document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfCarModelObjectsDefinedOnClass;
 
-    AddDataToTable(carToAdd);
+        CarArray.push(carToAdd);
+        document.getElementById("demoArray").innerHTML = "";
+        for (let index = 0; index < CarArray.length; index++)
+        {
+            document.getElementById("demoArray").innerHTML += CarArray[index] + "</br>";
+        }
+
+        AddDataToTable(carToAdd);
+    }
 }
 
 function AddDataToTable(carObject)
 {
-    if (tableEditingRow) 
-    {
-        tableEditingRow.cells[0].textContent = carObject.carName;
-        tableEditingRow.cells[1].textContent = carObject.carYear;
-        tableEditingRow.cells[2].textContent = carObject.carAge();
-        tableEditingRow.cells[3].textContent = carObject.carPrice;
-        tableEditingRow.cells[4].textContent = carObject.carModel;
+    // if (tableEditingRow) 
+    // {
+    //     tableEditingRow.cells[0].textContent = carObject.carName;
+    //     tableEditingRow.cells[1].textContent = carObject.carYear;
+    //     tableEditingRow.cells[2].textContent = carObject.carAge();
+    //     tableEditingRow.cells[3].textContent = carObject.carPrice;
+    //     tableEditingRow.cells[4].textContent = carObject.carModel;
 
-        // Nulstil state
-        // tableEditingRow = null;
-        // addButton.value = 'Tilføj Car eller Car Model'; // Sæt knapteksten tilbage
-        resetEditingState();
-    }
-    else 
-    {
+    //     // Nulstil state
+    //     resetEditingState();
+    // }
+    // else 
+    // {
         // Få fat i tbody-elementet i tabellen
         const tableBody = document.getElementById('data-table-body');
         
         // Opret en ny række (<tr>) og celler (<td>)
         const newRow = document.createElement('tr');
+        newRow.setAttribute('data-id', carObject.carId);
         
         const CarNameCell = document.createElement('td');
         CarNameCell.textContent = carObject.carName;
@@ -251,7 +356,23 @@ function AddDataToTable(carObject)
         deleteButton.className = 'delete-btn';
         deleteButton.addEventListener('click', function() {
             // Fjerner den forælder-række, knappen er en del af
-            newRow.remove(); 
+            //newRow.remove(); 
+            const rowId = parseInt(newRow.getAttribute('data-id'));
+            const carIndex = CarArray.findIndex(car => car.carId === rowId);
+            
+            if (carIndex !== -1) {
+                // NY LOGIK: Hent objektet før det slettes, og opdatér den statiske tæller
+                const carToDelete = CarArray[carIndex];
+                if (carToDelete instanceof CarModel) {
+                    CarModel.decreaseNumberOfCarModelObjects();
+                } else if (carToDelete instanceof Car) {
+                    Car.decreaseNumberOfCarObjects();
+                }
+
+                CarArray.splice(carIndex, 1);
+                newRow.remove();
+                UpdateObjectCounterTags();
+            }
         });
 
         // Opret "Ret"-knappen
@@ -264,6 +385,12 @@ function AddDataToTable(carObject)
 
             addButton.value = 'Ret Car eller Car Model';
             cancelButton.style.display = 'inline-block'; // Vis annuller-knappen
+
+            const rowId = parseInt(newRow.getAttribute('data-id'));
+            const carToEdit = CarArray.find(car => car.carId === rowId);
+            
+            editingCarId = rowId;
+
 
             // Få fat i dataen fra den række, der skal rettes
             const rowData = {
@@ -294,7 +421,7 @@ function AddDataToTable(carObject)
 
         // Tilføj den nye række til tabellen
         tableBody.appendChild(newRow);
-    }
+    //}
 
     ClearTextFields();
 }
@@ -308,9 +435,16 @@ function ClearTextFields()
 
 function resetEditingState() 
 {
+    editingCarId = null;
     tableEditingRow = null;
     addButton.value = 'Tilføj Car eller Car Model';
     ClearTextFields();
     cancelButton.style.display = 'none'; // Skjul annuller-knappen
+}
+
+function UpdateObjectCounterTags()
+{
+    document.getElementById("numberOfCarObjects").innerHTML = "Antal Car objekter defineret : " + Car.numberOfCarObjectsDefinedOnClass;
+    document.getElementById("numberOfCarModelObjects").innerHTML = "Antal CarModel objekter defineret : " + CarModel.numberOfCarModelObjectsDefinedOnClass;
 }
 </script>
