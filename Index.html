@@ -2,38 +2,21 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Site</title>
+    
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- font-awesome.min.css skal være med for at give pil down på submenuer !!! -->
   
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- font-awesome.min.css skal være med for at give pil down på submenuer !!! -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
  
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
- 
-  <script src="../javascriptFiles/Settings.js"></script>
-  <script src="../javaScriptFiles/javaScriptFunctions.js"></script>
-  <script src="../javaScriptFiles/JavaScriptBindingDynamic.js"></script>
-  <script src="../jQueryFiles/jQueryFunctions.js"></script>
-  <script src="../jQueryFiles/jQueryBindingDynamic.js"></script>
-  <script src="../TypeScriptFiles/HandleStudents.js"></script>
-  <script src="../javaScriptFiles/TodoItemsWebApi.js" asp-append-version="true"></script>
-
+  <script type="module" src="../javascriptFiles/Main.js"></script>
+  
   <link rel="stylesheet" href="../StyleSheetFiles/StyleSheetLess1.css"/>
-  <!-- <style>
-        /* body { font-family: Arial, sans-serif; margin: 20px; } */
-        form { margin-bottom: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        input { display: block; margin-bottom: 10px; padding: 8px; width: 250px; }
-        button { padding: 8px 12px; margin-right: 5px; cursor: pointer; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        .delete-btn { background-color: #f44336; color: white; border: none; }
-        .edit-btn { background-color: #008cba; color: white; border: none; }
-    </style> -->
 </head>
 
 <body>
@@ -46,8 +29,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html'); return false">Home</a>
+          <li>
+            <a class="nav-link active" href="#" 
+                data-pageUrl="Home.html" 
+                data-callbackFunctionName="initWebSite"
+                data-targetClassName="ContentFrameForHTMLFiles">Home</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -55,10 +41,32 @@
               javaScript
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/javaScriptPages/javaScriptDemo.html'); return false">javaScriptDemo</a></li>
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/javaScriptPages/javaScriptBindingDynamic.html'); return false">javaScriptBindingDynamic</a></li>
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/javaScriptPages/javaScriptClassDemo.html'); return false">javaScriptClassDemo</a></li>
+             
+              <li><a class="dropdown-item" href="#" 
+                data-pageUrl="/javaScriptPages/javaScriptDemo.html" 
+                data-targetClassName="ContentFrameForHTMLFiles">javaScriptDemo</a>
+              </li>
+
+              <li><a class="dropdown-item" href="#" 
+                data-pageUrl="/javaScriptPages/javaScriptDemoEvent.html" 
+                data-callbackFunctionName="init_javaScriptDemoEvent"
+                data-targetClassName="ContentFrameForHTMLFiles">javaScriptDemoEvent</a>
+              </li>
+            
+              <li><a class="dropdown-item" href="#" 
+                data-pageUrl="/javaScriptPages/javaScriptBindingDynamic.html" 
+                data-callbackFunctionName="init_javaScriptBindingDynamic"
+                data-targetClassName="ContentFrameForHTMLFiles">javaScriptBindingDynamic</a>
+              </li>
+            
+              <li><a class="dropdown-item" href="#" 
+                data-pageUrl="/javaScriptPages/javaScriptClassDemo.html" 
+                data-callbackFunctionName="init_javaScriptClassDemo"
+                data-targetClassName="ContentFrameForHTMLFiles">javaScriptClassDemo</a>
+              </li>
+
               <li><hr class="dropdown-divider"></li>
+
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
@@ -68,8 +76,20 @@
               jQuery
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryDemo.html'); return false">jQueryDemo</a></li>
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic.html'); return false">jQueryBindingDynamic</a></li>
+              <li><a class="dropdown-item" href="#" 
+                data-pageUrl="/jQueryPages/jQueryDemo.html" 
+                data-callbackFunctionName="init_jqueryDemo"
+                data-targetClassName="ContentFrameForHTMLFiles">jQueryDemo</a>
+              </li>
+
+              <li><a class="dropdown-item" href="#" 
+                data-pageUrl="/jQueryPages/jQueryBindingDynamic.html" 
+                data-callbackFunctionName="init_jQueryBindingDynamic"
+                data-targetClassName="ContentFrameForHTMLFiles">jQueryBindingDynamic</a>
+              </li>
+
+              
+              <!-- <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic.html'); return false">jQueryBindingDynamic</a></li> -->
               <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic1.html'); return false">jQueryBindingDynamic1</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -135,28 +155,11 @@
     <h2>Test it</h2>
   </div>
     
+  <!-- <script type="module" src="../jQueryFiles/jQueryFunctions.js"></script> -->
+   <!-- <script type="module" src="../javaScriptFiles/javaScriptDemoEvent.js"></script>
+   <script type="module" src="../javascriptFiles/javaScriptPageNavigation.js"></script> -->
 </body>
     
 </html>
 
-<script type="text/javascript">
-  //window.onload = InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'javaScriptDemo.html');
 
-  $(document).ready(function() {
-    InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'Home.html');
-  });
-
-  // function myFunction() 
-  // {
-  //   var x = document.getElementById("mytopnav");
-  //   if (x.className === "topnav") 
-  //   {
-  //     x.className += " responsive";
-  //   } 
-  //   else 
-  //   {
-  //     x.className = "topnav";
-  //   }
-  // }
-
-</script>

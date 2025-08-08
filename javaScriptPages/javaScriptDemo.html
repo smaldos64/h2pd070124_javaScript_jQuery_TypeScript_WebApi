@@ -13,11 +13,11 @@
 <br />
 <br />
 
-<p name="demo">JavaScript can hide HTML elements By Name.</p>
+<p name="demoFunction">JavaScript can hide HTML elements By Name.</p>
 
-<p name="demo">JavaScript can hide HTML elements  By Name 2.</p>
+<p name="demoFunction">JavaScript can hide HTML elements  By Name 2.</p>
 
-<p name="demo">JavaScript can hide HTML elements  By Name 3.</p>
+<p name="demoFunction">JavaScript can hide HTML elements  By Name 3.</p>
 
 <button type="button" onclick="ShowHideLines('none')">Skjul tekst</button>
 
@@ -26,14 +26,29 @@
 <br />
 <br />
 
-<div id="Mathias">
-    <p name="demoMathias">JavaScript can hide HTML elements By Div Id.</p>
+<div id="TagsInOneBlock">
+    <p name="demoInBlock">JavaScript can hide HTML elements By Div Id.</p>
 
-    <p name="demoMathias">JavaScript can hide HTML elements By Div Id 2.</p>
+    <p name="demoInBlock">JavaScript can hide HTML elements By Div Id 2.</p>
 
-    <p name="demoMathias">JavaScript can hide HTML elements By Div Id 3.</p>
+    <p name="demoInBlock">JavaScript can hide HTML elements By Div Id 3.</p>
 </div>
 
-<button type="button" onclick="document.getElementById('Mathias').style.display='none'">Skjul tekst</button>
+<button type="button" onclick="document.getElementById('TagsInOneBlock').style.display='none'">Skjul tekst</button>
 
-<button type="button" onclick="document.getElementById('Mathias').style.display='block'">Vis tekst</button>
+<button type="button" onclick="document.getElementById('TagsInOneBlock').style.display='block'">Vis tekst</button>
+
+<script type="text/javaScript">
+document.addEventListener('DOMContentLoaded', function() 
+{
+    function ShowHideLines(ShowHideText)
+    {
+        var DocumentElements = document.getElementsByName("demoFunction");
+
+        for (let Counter = 0; Counter < DocumentElements.length; Counter++)
+        {
+            DocumentElements[Counter].style.display = ShowHideText;
+        }
+    }
+}
+</script>

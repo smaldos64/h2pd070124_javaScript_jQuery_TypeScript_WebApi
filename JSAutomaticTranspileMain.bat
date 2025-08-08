@@ -1,3 +1,3 @@
-pushd TypeScript
+pushd TypeScriptFiles
 call AutomaticTranspileToJs.bat
 popd
