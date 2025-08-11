@@ -1,49 +1,107 @@
 // LoadPage funktionen i './PageNavigation.js' filen står for den praktiske¨
 // del af side navigation. 
-import { LoadPage } from './PageNavigation.js';
+//import { LoadPage } from './PageNavigation.js';
 
-// Event listener der lytter på klik i body (eller et andet overordnet element)
-document.body.addEventListener('click', function(event) 
-{
-    const target = event.target;
 
-    if (target.tagName === 'A' && target.hasAttribute('data-pageUrl')) 
-    {
-        event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('[data-htmlpageurl]');
+    const cache = new Map(); // Cache til prefetch og load-once
 
-        // Læs alle dine parametre fra data-attributterne i index.html filen
-        // Læg mærke til !!! at der udelukkende er små bogstaver i navnene her 
-        // i javaScript koden, selvom der også kan indgå store bogstaver i 
-        // navnene i index.html filen.
-        // Eksempelvis bliver  
-        const pageUrl = target.dataset.pageurl;
-        const callbackFunctionName = target.dataset.callbackfunctionname;
-        const targetClassName = target.dataset.targetclassname;
-        
-        // Find den rigtige callback funktion i vores mapping-objekt.
-        // Hvis ikke der findes en callback funktion for den loadede
-        // *.html side, sættes callbackFuntion = null;
-        //const callbackFunction = pageCallbackFunctionsTranslator[callbackFunctionName] || null;
-        
-        // Kald nu din funktion der loader *.html siden med alle de indsamlede parametre.
-        // Hermed sikrer vi, at koden i en (eventuel) callback funktion først køres,
-        // når siden faktisk er blevet loaded. Og dermed er vi sikre på, at det virker,
-        // som vi har tænskt os, det skal gøre !!!
-        LoadPage(pageUrl, targetClassName, callbackFunctionName);
+    async function prefetchPages() {
+        for (const link of links) {
+            if (link.dataset.prefetch === 'true') {
+                const url = link.dataset.htmlpageurl;
+                if (!cache.has(url)) {
+                    try {
+                        const response = await fetch(url);
+                        if (!response.ok) throw new Error(`Prefetch fejl for ${url}: ${response.statusText}`);
+                        const text = await response.text();
+                        cache.set(url, text);
+                    } catch (e) {
+                        console.warn(e);
+                    }
+                }
+            }
+        }
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-// Det der svarer til javaScript koden herover i jQuery er kodelinjen herunder :
-// $(function() { . Så denne kodelinje kan man bruge i setdet for, hvis man foretrækker
-// at arbejde i jQuery.   
-//$(function() {
+    // Forsøger at parse data-callbackparams string til et passende JS objekt eller value
+    function parseCallbackParams(paramStr) {
+        if (!paramStr) return undefined;
+        try {
+            // Hvis det er gyldig JSON, returneres det parsed JSON (objekt, array, tal, string)
+            return JSON.parse(paramStr);
+        } catch {
+            // Hvis det fejler, returneres stringen som den er
+            return paramStr;
+        }
+    }
 
-    // Vi sikrer os, at vores index.html side er blevet loaded ved brug af argumentet
-    // 'DOMContentLoaded' her i vores addEventListener "funktion", før vi kalder 
-    // loadPage funktionen. Vi kalder LoadPage direkte her, da vi skal have en *.html
-    // at starte op med, når vi loader siden. 
-    // Bruger vi ikke beskyttelsen DOMContentLoaded, kan vi ikke være sikre på, at det 
-    // vil virke !!!
-    LoadPage('Home.html', 'ContentFrameForHTMLFiles', 'initWebSite');
+    async function handlePageLoad(link) {
+        const htmlPageUrl = link.dataset.htmlpageurl;
+        const jsModuleUrl = link.dataset.jsmoduleurl;  
+        const callbackFunctionName = link.dataset.callbackfunctionname;
+        const targetClassName = link.dataset.targetclassname;
+        const loadOnce = link.dataset.loadOnce === 'true';
+
+        const target = document.querySelector(`.${targetClassName}`);
+        if (!target) {
+            console.error(`Kan ikke finde target med klasse '${targetClassName}'`);
+            return;
+        }
+
+        if (loadOnce && target.dataset.loaded === 'true') {
+            return;
+        }
+
+        try {
+            let htmlContent;
+            if (cache.has(htmlPageUrl)) {
+                htmlContent = cache.get(htmlPageUrl);
+            } else {
+                const response = await fetch(htmlPageUrl);
+                if (!response.ok) throw new Error(`Fejl ved hentning af ${htmlPageUrl}: ${response.statusText}`);
+                htmlContent = await response.text();
+                if (link.dataset.prefetch === 'true') {
+                    cache.set(htmlPageUrl, htmlContent);
+                }
+            }
+
+            target.innerHTML = htmlContent;
+            target.dataset.loaded = 'true';
+
+            if (jsModuleUrl && callbackFunctionName) {
+                const module = await import(jsModuleUrl);
+
+                const rawParams = link.dataset.callbackparams;
+                const params = parseCallbackParams(rawParams);
+
+                if (typeof module[callbackFunctionName] === 'function') {
+                    if (params !== undefined) {
+                        module[callbackFunctionName](params);
+                    } else {
+                        module[callbackFunctionName]();
+                    }
+                } else {
+                    console.error(`Callback '${callbackFunctionName}' ikke fundet i modulet '${jsModuleUrl}'`);
+                }
+            }
+        } catch (error) {
+            console.error('Fejl ved load af side eller modul:', error);
+        }
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', async (event) => {
+            event.preventDefault();
+            await handlePageLoad(link);
+        });
+    });
+
+    prefetchPages();
+
+    const defaultLink = document.querySelector('[data-default="true"]');
+    if (defaultLink) {
+        handlePageLoad(defaultLink);
+    }
 });

@@ -31,10 +31,92 @@
 
           <li>
             <a class="nav-link active" href="#" 
-                data-pageUrl="Home.html" 
+                data-htmlPageUrl="Home.html"
+                data-targetClassName="ContentFrameForHTMLFiles"
+                data-jsModuleUrl="/javaScriptFiles/Home.js"
                 data-callbackFunctionName="initWebSite"
-                data-targetClassName="ContentFrameForHTMLFiles">Home</a>
+                data-callbackParams="Hej Hansi"
+                data-load-once="true"
+                data-prefetch="true"
+                data-default="true">
+              Home
+            </a>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Forklaring
+            </a>
+            <ul class="dropdown-menu">
+             
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/StatiskSide.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles">
+                  Statisk Side
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/DynamiskSideCallbackUdenParametreTilCallbackFunktion.html"
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/DynamiskSideCallbackUdenParametreTilCallbackFunktion.js"
+                  data-callbackFunctionName="init_DynamiskSideCallbackUdenParametreTilCallbackFunktion">
+                  Callback uden Parametre
+                </a>
+              </li>
+            
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/DynamiskSideCallbackMedEnkeltParameterTilCallbackFunktion.html"
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/DynamiskSideCallbackMedEnkeltParameterTilCallbackFunktion.js"
+                  data-callbackFunctionName="init_DynamiskSideCallbackMedEnkeltParameterTilCallbackFunktion"
+                  data-callbackParams="Teksten her er overført som parameter fra Index.html filen ved brug af data-callbackParams">
+                  Callback med én Parameter
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/DynamiskSideCallbackMedArrayParameterTilCallbackFunktion.html"
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/DynamiskSideCallbackMedArrayParameterTilCallbackFunktion.js"
+                  data-callbackFunctionName="init_DynamiskSideCallbackMedArrayParameterTilCallbackFunktion"
+                  data-callbackParams="[1, 2, 3, 4, 5]">
+                  Callback Array Parameter
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/DynamiskSideCallbackMedObjektParameterTilCallbackFunktion.html"
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/DynamiskSideCallbackMedObjektParameterTilCallbackFunktion.js"
+                  data-callbackFunctionName="init_DynamiskSideCallbackMedObjektParameterTilCallbackFunktion"
+                  data-callbackParams='{"carId": 1, "carName" : "Honda",  "carPrice": 120000, "carYear": 2018}'>
+                  Callback Objekt Parameter
+                </a>
+              </li>
+            
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/DynamiskSideCallbackMedArrayAfObjekterParameterTilCallbackFunktion.html"
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/DynamiskSideCallbackMedArrayAfObjekterParameterTilCallbackFunktion.js"
+                  data-callbackFunctionName="init_DynamiskSideCallbackMedArrayAfObjekterParameterTilCallbackFunktion"
+                  data-callbackParams='[{"carId": 1, "carName" : "Honda",  "carPrice": 120000, "carYear": 2018},{"carId": 2, "carName" : "Toyota",  "carPrice": 100000, "carYear": 2020}]'>
+                  Callback Array Objekt Parameter
+                </a>
+              </li>
+
+              <li><hr class="dropdown-divider"></li>
+
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
