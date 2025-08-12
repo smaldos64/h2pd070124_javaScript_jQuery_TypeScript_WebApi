@@ -1,71 +1,11 @@
-// De importede funktioner er funktioner, der skal køres som Callback funktioner,
-// når en given *.html fil er blevet loaded ind i det angivne class tag på
-// index.html siden.
-// Når en given callback funktion kører, er vi sikre på, at indholdet på den 
-// pågældende *.html fil er blevet loaded ind i klassen på index.html filen !!!
-// En callback funktion er også det, vi kender som en Delegate fra C# !!!
-
-// Når man adderer nye html sider til sit projekt, sletter hmtl sider eller
-// ændrer html sider, skal man kun ændre i import listen lige herunder
-// og i pageCallbackFunctionsTranslator arrayet. Al anden kode i filen her
-// bliver ikke berørt af disse ændringer.
-import { initWebSite} from './Home.js'
-import { init_javaScriptClassDemo} from './javaScriptClassDemo.js'
-import { init_javaScriptDemoEvent } from './javaScriptDemoEvent.js'
-import { init_javaScriptBindingDynamic } from './JavaScriptBindingDynamic.js'
-import { init_jqueryDemo } from '../jqueryFiles/jQueryDemo.js'
-import { init_jQueryBindingDynamic } from '../jQueryFiles/jQueryBindingDynamic.js'
-
-
-// Her defineres det array (), der fungerer på den måde, at vi slår op i denne
-// og finder en funktion ud fra funktionsnavnet.
-// Det vi kalder et KeyValyePair i C# verdenen.
-const pageCallbackFunctionsTranslator = {
-    'initWebSite': initWebSite,
-    'init_javaScriptDemoEvent': init_javaScriptDemoEvent,
-    'init_javaScriptClassDemo': init_javaScriptClassDemo,
-    'init_javaScriptBindingDynamic': init_javaScriptBindingDynamic,
-    'init_jqueryDemo': init_jqueryDemo,
-    'init_jQueryBindingDynamic': init_jQueryBindingDynamic
-};
-
-export function LoadPage(pageUrl, targetClassName, callbackFunctionName) 
-{
-    fetch(pageUrl)
-        .then(response => response.text())
-        .then(html => {
-            // Brug den dynamiske klasse til at finde elementet
-            const contentContainer = document.querySelector(`.${targetClassName}`);
-            if (contentContainer) 
-            {
-              // Her hentes indholdet af vores nuværende html side ind
-              // i den angivne klasse på index.html siden.
-              contentContainer.innerHTML = html;
-              HandleNavigationBar(pageUrl);
-
-              // Find den rigtige callback funktion i vores mapping-objekt.
-              // Hvis ikke der findes en callback funktion for den loadede
-              // *.html side, sættes callbackFuntion = null;
-              const callbackFunction = pageCallbackFunctionsTranslator[callbackFunctionName] || null;
-              
-              // Hvis vi har angivet en callback funktion, så bliver denne callback
-              // funktion kaldt i kode linjen : callbackFunction();
-              if (typeof callbackFunction === 'function') 
-              {
-                  callbackFunction();
-              }
-          } 
-          else 
-          {
-              console.error(`Fejl: Kunne ikke finde et element med klassen "${targetClass}".`);
-          }
-      })
-      .catch(error => console.error('Fejl ved indlæsning af side:', error));
-}
+// LoadPage funktionen i './PageNavigation.js' filen står for den praktiske¨
+// del af side navigation. 
+//import { LoadPage } from './PageNavigation.js';
+//import { HandleNavigationBar } from './PageNavigation.js';
 
 // Funktionen HandleNavigationBar står for at sætte den/de fremhævede farve/farver
 // på den nuværende aktive *.html fil => det nuværende aktive menupunkt.
-export function HandleNavigationBar(pageUrl) 
+function HandleNavigationBar(pageUrl) 
 {
     // Fjerner 'active' klassen fra alle a-tags i navigationsbaren
     const navLinks = document.querySelectorAll('.navbar-nav a');
@@ -90,8 +30,6 @@ export function HandleNavigationBar(pageUrl)
         {
             // Bemærk: 'textContent' eller 'innerText' erstatter $(this).text()
             if (link.dataset.htmlpageurl.trim() === pageUrl)
-            //if (link.dataset.htmlpageurl.trim() === RemovePathFromFileName(pageUrl)) 
-            //if (link.textContent.trim() + ".html" == RemovePathFromFileName(pageUrl)) 
             {
                 // Tilføjer 'active' klassen til det matchende link
                 link.classList.add('active');
@@ -114,3 +52,109 @@ function RemovePathFromFileName(pageUrl)
   var SubString = pageUrl.substring(pageUrl.lastIndexOf('/') + 1);
   return SubString;
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('[data-htmlpageurl]');
+    const cache = new Map(); // Cache til prefetch og load-once
+
+    async function prefetchPages() {
+        for (const link of links) {
+            if (link.dataset.prefetch === 'true') {
+                const url = link.dataset.htmlpageurl;
+                if (!cache.has(url)) {
+                    try {
+                        const response = await fetch(url);
+                        if (!response.ok) throw new Error(`Prefetch fejl for ${url}: ${response.statusText}`);
+                        const text = await response.text();
+                        cache.set(url, text);
+                    } catch (e) {
+                        console.warn(e);
+                    }
+                }
+            }
+        }
+    }
+
+    // Forsøger at parse data-callbackparams string til et passende JS objekt eller value
+    function parseCallbackParams(paramStr) {
+        if (!paramStr) return undefined;
+        try {
+            // Hvis det er gyldig JSON, returneres det parsed JSON (objekt, array, tal, string)
+            return JSON.parse(paramStr);
+        } catch {
+            // Hvis det fejler, returneres stringen som den er
+            return paramStr;
+        }
+    }
+
+    async function handlePageLoad(link) {
+        const htmlPageUrl = link.dataset.htmlpageurl;
+        const jsModuleUrl = link.dataset.jsmoduleurl;  
+        const callbackFunctionName = link.dataset.callbackfunctionname;
+        const targetClassName = link.dataset.targetclassname;
+        const loadOnce = link.dataset.loadOnce === 'true';
+
+        const target = document.querySelector(`.${targetClassName}`);
+        if (!target) {
+            console.error(`Kan ikke finde target med klasse '${targetClassName}'`);
+            return;
+        }
+
+        if (loadOnce && target.dataset.loaded === 'true') {
+            return;
+        }
+
+        try {
+            let htmlContent;
+            if (cache.has(htmlPageUrl)) {
+                htmlContent = cache.get(htmlPageUrl);
+            } else {
+                const response = await fetch(htmlPageUrl);
+                if (!response.ok) throw new Error(`Fejl ved hentning af ${htmlPageUrl}: ${response.statusText}`);
+                htmlContent = await response.text();
+                if (link.dataset.prefetch === 'true') {
+                    cache.set(htmlPageUrl, htmlContent);
+                }
+            }
+
+            target.innerHTML = htmlContent;
+            target.dataset.loaded = 'true';
+            HandleNavigationBar(htmlPageUrl);
+
+            if (jsModuleUrl && callbackFunctionName) {
+                const module = await import(jsModuleUrl);
+
+                const rawParams = link.dataset.callbackparams;
+                const params = parseCallbackParams(rawParams);
+
+                if (typeof module[callbackFunctionName] === 'function') {
+                    if (params !== undefined) {
+                        module[callbackFunctionName](params);
+                    } else {
+                        module[callbackFunctionName]();
+                    }
+                } else {
+                    console.error(`Callback '${callbackFunctionName}' ikke fundet i modulet '${jsModuleUrl}'`);
+                }
+            }
+        } catch (error) {
+            console.error('Fejl ved load af side eller modul:', error);
+        }
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', async (event) => {
+            event.preventDefault();
+            await handlePageLoad(link);
+        });
+    });
+
+    prefetchPages();
+
+    const defaultLink = document.querySelector('[data-default="true"]');
+    if (defaultLink) {
+        handlePageLoad(defaultLink);
+    }
+});
