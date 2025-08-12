@@ -1,8 +1,3 @@
-// LoadPage funktionen i './PageNavigation.js' filen står for den praktiske¨
-// del af side navigation. 
-//import { LoadPage } from './PageNavigation.js';
-//import { HandleNavigationBar } from './PageNavigation.js';
-
 // Funktionen HandleNavigationBar står for at sætte den/de fremhævede farve/farver
 // på den nuværende aktive *.html fil => det nuværende aktive menupunkt.
 function HandleNavigationBar(pageUrl) 
@@ -158,3 +153,82 @@ document.addEventListener('DOMContentLoaded', () => {
         handlePageLoad(defaultLink);
     }
 });
+
+
+// Ny kode med mulighed for at blande parametere herunder. 
+// Min ChatGPT limit er overskredet, så jeg må vente med denne implementering.
+// document.addEventListener("DOMContentLoaded", () => {
+//     const links = document.querySelectorAll("[data-htmlpageurl]");
+//     const contentFrame = document.querySelector(".ContentFrameForHTMLFiles");
+//     const pageCache = {};
+
+//     async function loadPage(url, loadOnce, prefetch) {
+//         if (loadOnce && pageCache[url]) {
+//             contentFrame.innerHTML = pageCache[url];
+//             return;
+//         }
+//         const response = await fetch(url);
+//         if (!response.ok) throw new Error(`Kunne ikke hente ${url}`);
+//         const html = await response.text();
+//         if (loadOnce || prefetch) {
+//             pageCache[url] = html;
+//         }
+//         contentFrame.innerHTML = html;
+//         HandleNavigationBar(url);
+//     }
+
+//     async function runCallback(jsmoduleurl, callbackFunctionName, rawParams) {
+//         if (!callbackFunctionName) return;
+//         //const fn = window[functionName];
+//         const module = await import(jsmoduleurl);
+//         const fn = module[callbackFunctionName]; 
+//         if (typeof fn === "function") {
+//             let params = [];
+//             if (rawParams) {
+//                 try {
+//                     const parsed = JSON.parse(rawParams);
+//                     if (Array.isArray(parsed)) {
+//                         params = parsed; // Flere argumenter
+//                     } else {
+//                         params = [parsed]; // Én værdi pakkes i array
+//                     }
+//                 } catch {
+//                     // Hvis ikke gyldig JSON, send som streng
+//                     params = [rawParams];
+//                 }
+//             }
+//             fn(...params); // Spread som separate argumenter
+//         } else {
+//             console.warn(`Callback-funktion "${functionName}" findes ikke.`);
+//         }
+//     }
+
+//     // Prefetch sider
+//     links.forEach(link => {
+//         if (link.dataset.prefetch === "true") {
+//             fetch(link.dataset.htmlpageurl)
+//                 .then(res => res.ok ? res.text() : Promise.reject())
+//                 .then(html => pageCache[link.dataset.htmlpageurl] = html)
+//                 .catch(err => console.warn("Prefetch fejl:", err));
+//         }
+//     });
+
+//     // Klik-håndtering
+//     links.forEach(link => {
+//         link.addEventListener("click", async (e) => {
+//             e.preventDefault();
+//             const { htmlpageurl, loadonce, prefetch, jsmoduleurl, callbackfunctionname, callbackparams } = link.dataset;
+//             await loadPage(htmlpageurl, loadonce === "true", prefetch === "true");
+//             //if (jsmoduleurl === "true") {
+//             if (null != jsmoduleurl) {
+//                 runCallback(jsmoduleurl, callbackfunctionname, callbackparams);
+//             }
+//         });
+//     });
+
+//     // Load default-side ved startup
+//     const defaultLink = document.querySelector("[data-default='true']");
+//     if (defaultLink) {
+//         defaultLink.click();
+//     }
+// });
