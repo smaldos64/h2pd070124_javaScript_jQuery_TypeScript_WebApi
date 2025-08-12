@@ -36,7 +36,7 @@
                 data-jsModuleUrl="/javaScriptFiles/Home.js"
                 data-callbackFunctionName="initWebSite"
                 data-callbackParams="Hej Hansi"
-                data-load-once="true"
+                data-load-once="false"
                 data-prefetch="true"
                 data-default="true">
               Home
@@ -124,27 +124,42 @@
             </a>
             <ul class="dropdown-menu">
              
-              <li><a class="dropdown-item" href="#" 
-                data-pageUrl="/javaScriptPages/javaScriptDemo.html" 
-                data-targetClassName="ContentFrameForHTMLFiles">javaScriptDemo</a>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/javaScriptPages/javaScriptDemo.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles">
+                  javaScriptDemo
+                </a>
               </li>
 
-              <li><a class="dropdown-item" href="#" 
-                data-pageUrl="/javaScriptPages/javaScriptDemoEvent.html" 
-                data-callbackFunctionName="init_javaScriptDemoEvent"
-                data-targetClassName="ContentFrameForHTMLFiles">javaScriptDemoEvent</a>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlpageUrl="/javaScriptPages/javaScriptDemoEvent.html"
+                  data-targetClassName="ContentFrameForHTMLFiles" 
+                  data-jsModuleUrl="/javaScriptFiles/javaScriptDemoEvent.js"
+                  data-callbackFunctionName="init_javaScriptDemoEvent">
+                  javaScriptDemoEvent
+                </a>
               </li>
             
-              <li><a class="dropdown-item" href="#" 
-                data-pageUrl="/javaScriptPages/javaScriptBindingDynamic.html" 
-                data-callbackFunctionName="init_javaScriptBindingDynamic"
-                data-targetClassName="ContentFrameForHTMLFiles">javaScriptBindingDynamic</a>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlpageUrl="/javaScriptPages/javaScriptBindingDynamic.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/javaScriptBindingDynamic.js"
+                  data-callbackFunctionName="init_javaScriptBindingDynamic">
+                  javaScriptBindingDynamic
+                </a>
               </li>
             
-              <li><a class="dropdown-item" href="#" 
-                data-pageUrl="/javaScriptPages/javaScriptClassDemo.html" 
-                data-callbackFunctionName="init_javaScriptClassDemo"
-                data-targetClassName="ContentFrameForHTMLFiles">javaScriptClassDemo</a>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlpageUrl="/javaScriptPages/javaScriptClassDemo.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/avaScriptClassDemo.js"
+                  data-callbackFunctionName="init_javaScriptClassDemo">
+                  javaScriptClassDemo
+                </a>
               </li>
 
               <li><hr class="dropdown-divider"></li>
@@ -158,21 +173,36 @@
               jQuery
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" 
-                data-pageUrl="/jQueryPages/jQueryDemo.html" 
-                data-callbackFunctionName="init_jqueryDemo"
-                data-targetClassName="ContentFrameForHTMLFiles">jQueryDemo</a>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlpageUrl="/jQueryPages/jQueryDemo.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/jQueryFiles/jQueryDemo.js"
+                  data-callbackFunctionName="init_jqueryDemo">
+                  jQueryDemo
+                </a>
               </li>
 
-              <li><a class="dropdown-item" href="#" 
-                data-pageUrl="/jQueryPages/jQueryBindingDynamic.html" 
-                data-callbackFunctionName="init_jQueryBindingDynamic"
-                data-targetClassName="ContentFrameForHTMLFiles">jQueryBindingDynamic</a>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlpageUrl="/jQueryPages/jQueryBindingDynamic.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/jQueryFiles/jQueryBindingDynamic.js"
+                  data-callbackFunctionName="init_jQueryBindingDynamic">
+                  jQueryBindingDynamic
+                </a>
               </li>
 
-              
-              <!-- <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic.html'); return false">jQueryBindingDynamic</a></li> -->
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/jQueryPages/jQueryBindingDynamic1.html'); return false">jQueryBindingDynamic1</a></li>
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlpageUrl="/jQueryPages/jQueryBindingDynamic1.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/jQueryFiles/jQueryBindingDynamic1.js"
+                  data-callbackFunctionName="init_jQueryBindingDynamic1">
+                  jQueryBindingDynamic1
+                </a>
+              </li>
+             
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
@@ -182,9 +212,25 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               CSS
             </a>
+
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/CSS_Pages/ShowCSS_Properties.html'); return false">ShowCSS_Properties</a></li>
-              <li><a class="dropdown-item" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', '/CSS_Pages/ShowCSS_Properties1.html'); return false">ShowCSS_Properties1</a></li>
+
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/CSS_Pages/ShowCSS_Properties.html" 
+                  data-targetClassName="ContentFrameForHTMLFiles">
+                  ShowCSS Properties
+                </a>
+              </li>
+
+              <li>
+              <a class="dropdown-item" href="#" 
+                data-htmlPageUrl="/CSS_Pages/ShowCSS_Properties1.html" 
+                data-targetClassName="ContentFrameForHTMLFiles">
+                ShowCSS Properties 1
+              </a>
+              </li>
+
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
@@ -219,10 +265,6 @@
           <li class="nav-item"></li>
             <a class="nav-link" href="#" onclick="InsertContentFromHTMLFileInSpecifiedClassUsing_jQuery('ContentFrameForHTMLFiles', 'h2pd070124.html'); return false">h2pd070124</a>
           </li>
-
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li> -->
 
         </ul>
         <form class="d-flex" role="search">

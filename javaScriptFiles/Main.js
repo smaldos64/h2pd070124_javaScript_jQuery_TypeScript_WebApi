@@ -1,6 +1,7 @@
 // LoadPage funktionen i './PageNavigation.js' filen står for den praktiske¨
 // del af side navigation. 
 //import { LoadPage } from './PageNavigation.js';
+import { HandleNavigationBar } from './PageNavigation.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             target.innerHTML = htmlContent;
             target.dataset.loaded = 'true';
+            HandleNavigationBar(htmlPageUrl);
 
             if (jsModuleUrl && callbackFunctionName) {
                 const module = await import(jsModuleUrl);

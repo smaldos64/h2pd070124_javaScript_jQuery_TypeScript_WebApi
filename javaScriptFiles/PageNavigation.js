@@ -65,7 +65,7 @@ export function LoadPage(pageUrl, targetClassName, callbackFunctionName)
 
 // Funktionen HandleNavigationBar står for at sætte den/de fremhævede farve/farver
 // på den nuværende aktive *.html fil => det nuværende aktive menupunkt.
-function HandleNavigationBar(pageUrl) 
+export function HandleNavigationBar(pageUrl) 
 {
     // Fjerner 'active' klassen fra alle a-tags i navigationsbaren
     const navLinks = document.querySelectorAll('.navbar-nav a');
@@ -82,20 +82,29 @@ function HandleNavigationBar(pageUrl)
     // Itererer over hvert nav-link
     for (const link of navLinks) 
     {
-        // Bemærk: 'textContent' eller 'innerText' erstatter $(this).text()
-        if (link.textContent.trim() + ".html" === RemovePathFromFileName(pageUrl)) 
+        // Vi kan have elementer, der ikke har dataset.htmlpageurl defineret. 
+        // Så det tjekker vi lige på først.
+        // Hvis ikke dataset.htmlpageurl er defineret, er det ikke en *.html side,
+        // Så vi kan bare skippe dette element.
+        if (link.dataset.htmlpageurl)
         {
-            // Tilføjer 'active' klassen til det matchende link
-            link.classList.add('active');
-
-            // Tjekker, om den øvre forælder har 'dropdown-menu' klassen
-            if (link.parentNode.parentNode.classList.contains('dropdown-menu')) 
+            // Bemærk: 'textContent' eller 'innerText' erstatter $(this).text()
+            if (link.dataset.htmlpageurl.trim() === pageUrl)
+            //if (link.dataset.htmlpageurl.trim() === RemovePathFromFileName(pageUrl)) 
+            //if (link.textContent.trim() + ".html" == RemovePathFromFileName(pageUrl)) 
             {
-                // Tilføjer 'MenuCurrentItemParent' til den korrekte forælder (den der har 'dropdown' klassen)
-                link.parentNode.parentNode.parentNode.classList.add('MenuCurrentItemParent');
+                // Tilføjer 'active' klassen til det matchende link
+                link.classList.add('active');
+
+                // Tjekker, om den øvre forælder har 'dropdown-menu' klassen
+                if (link.parentNode.parentNode.classList.contains('dropdown-menu')) 
+                {
+                    // Tilføjer 'MenuCurrentItemParent' til den korrekte forælder (den der har 'dropdown' klassen)
+                    link.parentNode.parentNode.parentNode.classList.add('MenuCurrentItemParent');
+                }
+                // 'break' afslutter løkken, ligesom 'return false' i jQuery's .each()
+                break;
             }
-            // 'break' afslutter løkken, ligesom 'return false' i jQuery's .each()
-            break;
         }
     }
 }
