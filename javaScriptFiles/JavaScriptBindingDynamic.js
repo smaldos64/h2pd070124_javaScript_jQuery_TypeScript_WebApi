@@ -67,7 +67,7 @@ function CalculateWidthOnControl(Control_Object)
 // Callback funktion som bliver kaldt, når siden her javaScriptBindingDunamic.html
 // er blevet loaded ind i klassen på index.html filen. Så der er ingen grund til
 // at tjekke på DOMContentLoaded !!!
-export function init_javaScriptBindingDynamic()
+export function init_javaScriptBindingDynamic(numberOfButtonsToInsertOnStartup = 3)
 {
     btnAddNewButton = document.getElementById("btnAddNewButton");
 
@@ -95,6 +95,11 @@ export function init_javaScriptBindingDynamic()
         else 
         {
             console.error("Fejl: Kunne ikke finde 'txtButtonContext'-elementet. Tjek din HTML.");
+        }
+
+        for (let counter = 0; counter < numberOfButtonsToInsertOnStartup; counter++)
+        {
+            AddNewButton();
         }
     }
     else

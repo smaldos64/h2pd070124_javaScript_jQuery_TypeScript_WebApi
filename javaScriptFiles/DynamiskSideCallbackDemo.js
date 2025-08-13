@@ -1,4 +1,4 @@
-﻿let ButtonAddedCounter = 0;
+let ButtonAddedCounter = 0;
 
 let ButtonAddedClass;
 let CurrentEditItem;
@@ -6,7 +6,10 @@ let CurrentDeleteItem;
 
 const textBoxDefaultText = "Init Text";
 
-export function init_jQueryBindingDynamic(numberOfButtonsToInsertOnStartup = 3)
+
+export function init_DynamiskSideCallbackDemo({numberOfButtonsToInsertOnStartup = 3, 
+                                               backgroundImage = "/Pictures/Struervej1.jfif",
+                                               usejQuery = false})
 {
     function AddNewButton()
     {
@@ -42,36 +45,7 @@ export function init_jQueryBindingDynamic(numberOfButtonsToInsertOnStartup = 3)
     }
 
     $(document).on("click", ".ContentFrameForHTMLFiles #btnAddNewButton", function() {
-        // ButtonAddedCounter++;
-        // ButtonAddedClass = $(".ButtonsAdded");
-
-        // var WorkStringCell0 = "<td>" + ButtonAddedCounter + "</td>";
-
-        // var WorkString1 = "<input id='btnDynamic" + ButtonAddedCounter + "' ";
-        // WorkString1 += "value='btnDynamic" + ButtonAddedCounter + "' ";
-        // WorkString1 += "type='button'";
-        // WorkString1 += " />";
-        // var WorkStringCell1 = "<td>" + WorkString1 + "</td>";
-
-        // var WorkString2 = "<input id='btnEditDynamic" + ButtonAddedCounter + "' ";
-        // WorkString2 += "value='btnEditDynamic_" + ButtonAddedCounter + "' ";
-        // WorkString2 += "type='button'";
-        // WorkString2 += " />";
-        // var WorkStringCell2 = "<td>" + WorkString2 + "</td>";
-
-        // var WorkString3 = "<input id='btnDeleteDynamic" + ButtonAddedCounter + "' ";
-        // WorkString3 += "value='btnDeleteDynamic_" + ButtonAddedCounter + "' ";
-        // WorkString3 += "type='button'";
-        // WorkString3 += " />";
-        // var WorkStringCell3 = "<td>" + WorkString3 + "</td>";
-        
-        // var NewRowHTML = "<tr>" + WorkStringCell0 + WorkStringCell1 + 
-        //                 WorkStringCell2 + WorkStringCell3 + "</tr>";
-        // $(".ContentFrameForHTMLFiles #DataTable tbody").append(NewRowHTML);
-        
-        // ButtonAddedClass.removeClass("None");
-        // $("#txtEditItem").val(textBoxDefaultText);
-        AddNewButton();
+       AddNewButton();
     });
 
     $(document).on("click", ".ContentFrameForHTMLFiles [id^='btnEditDynamic']", function(e) {
@@ -116,5 +90,22 @@ export function init_jQueryBindingDynamic(numberOfButtonsToInsertOnStartup = 3)
     for (let counter = 0; counter < numberOfButtonsToInsertOnStartup; counter++)
     {
         AddNewButton();
+    }
+
+    if (true === usejQuery)
+    {
+        $("#Picture").attr('src', backgroundImage);
+        $(".TextField").text("Der er brugt jQuery !!!");
+    }
+    else
+    {
+        document.getElementById("Picture").src = backgroundImage;
+        //document.getElementById("Picture").setAttribute('src', backgroundImage);
+        let elementList = document.getElementsByClassName("TextField");
+
+        for (let counter = 0; counter < elementList.length; counter++)
+        {
+            elementList[counter].innerHTML = "Der er brugt javaScript";
+        }
     }
 }
