@@ -1,4 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /// reference path="./node_modules/@types(jquery/index.d.ts"
+var jquery_1 = require("jquery");
 var WorkingMode;
 (function (WorkingMode) {
     WorkingMode[WorkingMode["Saving"] = 0] = "Saving";
@@ -121,9 +124,9 @@ function DeleteStudentObject(StudentId) {
         Student.NumberOfObjectCreatedOnClass = --Student.NumberOfObjectCreatedOnClass;
     }
 }
-$(document).ready(function () {
+(0, jquery_1.default)(document).ready(function () {
     function SpecifyNumberOfObjectsOnClass() {
-        $("#NumberOfObjectsOnClass").text("Antal objekter defineret på klasse er : " + Student.NumberOfObjectCreatedOnClass);
+        (0, jquery_1.default)("#NumberOfObjectsOnClass").text("Antal objekter defineret på klasse er : " + Student.NumberOfObjectCreatedOnClass);
     }
     function SwichBetweenSaveAndEditMode(CurrentWorkingMode) {
         if (WorkingMode.Saving == CurrentWorkingMode) {
@@ -159,12 +162,12 @@ $(document).ready(function () {
     }
     function CheckTextFields() {
         var StudentAgeTest;
-        if ($("#txtStudentName").val().length < MinNumberOfCharactersInName) {
+        if ((0, jquery_1.default)("#txtStudentName").val().length < MinNumberOfCharactersInName) {
             alert("Der skal minimum være " + MinNumberOfCharactersInName.toString() + " karakterer i Student navn !!!");
             return (false);
         }
         try {
-            StudentAgeTest = parseInt($("#txtStudentAge").val());
+            StudentAgeTest = parseInt((0, jquery_1.default)("#txtStudentAge").val());
         }
         catch (e) {
             alert(e.message);
@@ -179,24 +182,24 @@ $(document).ready(function () {
         }
         return (false);
     }
-    $(document).on("click", ".ContentFrameForHTMLFiles #btnClearTextFields", function () {
+    (0, jquery_1.default)(document).on("click", ".ContentFrameForHTMLFiles #btnClearTextFields", function () {
         ClearTextFields();
     });
-    $(document).on("click", ".ContentFrameForHTMLFiles #btnAddNewStudent", function () {
-        btnClearTextFields = $("#btnClearTextFields");
-        btnAddNewStudent = $("#btnAddNewStudent");
-        studentTableId = $("#StudentData");
-        txtStudentName = $("#txtStudentName");
-        txtStudentAge = $("#txtStudentAge");
-        btnEditStudent = $("#btnEditStudent");
-        btnSkipEditStudent = $("#btnSkipEditStudent");
-        StudentDataRows = $(".StudentDataRows");
-        TypeScriptDemo = $("#TypeScriptDemo");
-        NumberOfObjectsOnClass = $("#NumberOfObjectsOnClass");
-        btnTypeScriptFunctionOverloadDemo = $("#btnTypeScriptFunctionOverloadDemo");
-        TestFunctionOverload = $("#TestFunctionOverload");
-        txtStudentAdd1 = $("#txtStudentAdd1");
-        txtStudentAdd2 = $("#txtStudentAdd2");
+    (0, jquery_1.default)(document).on("click", ".ContentFrameForHTMLFiles #btnAddNewStudent", function () {
+        btnClearTextFields = (0, jquery_1.default)("#btnClearTextFields");
+        btnAddNewStudent = (0, jquery_1.default)("#btnAddNewStudent");
+        studentTableId = (0, jquery_1.default)("#StudentData");
+        txtStudentName = (0, jquery_1.default)("#txtStudentName");
+        txtStudentAge = (0, jquery_1.default)("#txtStudentAge");
+        btnEditStudent = (0, jquery_1.default)("#btnEditStudent");
+        btnSkipEditStudent = (0, jquery_1.default)("#btnSkipEditStudent");
+        StudentDataRows = (0, jquery_1.default)(".StudentDataRows");
+        TypeScriptDemo = (0, jquery_1.default)("#TypeScriptDemo");
+        NumberOfObjectsOnClass = (0, jquery_1.default)("#NumberOfObjectsOnClass");
+        btnTypeScriptFunctionOverloadDemo = (0, jquery_1.default)("#btnTypeScriptFunctionOverloadDemo");
+        TestFunctionOverload = (0, jquery_1.default)("#TestFunctionOverload");
+        txtStudentAdd1 = (0, jquery_1.default)("#txtStudentAdd1");
+        txtStudentAdd2 = (0, jquery_1.default)("#txtStudentAdd2");
         if (CheckTextFields()) {
             var WorkString;
             var Student_Object = new Student(txtStudentAge.val(), txtStudentName.val());
@@ -221,15 +224,15 @@ $(document).ready(function () {
             WorkString += "class='" + DeleteStudentClassName + "'";
             WorkString += ">Slet Student (" + Student_Object.StudentID + ") </button>";
             WorkString += "</tr>";
-            $(".StudentDataRows").append(WorkString);
-            $("#TypeScriptDemo").html(StudentList.toString());
+            (0, jquery_1.default)(".StudentDataRows").append(WorkString);
+            (0, jquery_1.default)("#TypeScriptDemo").html(StudentList.toString());
             SpecifyNumberOfObjectsOnClass();
             ClearTextFields();
         }
     });
-    $('body').on('click', '.' + DeleteStudentClassName, function () {
-        var StudentId = Number($(this).val());
-        var CurrentRow = $(this).closest('tr');
+    (0, jquery_1.default)('body').on('click', '.' + DeleteStudentClassName, function () {
+        var StudentId = Number((0, jquery_1.default)(this).val());
+        var CurrentRow = (0, jquery_1.default)(this).closest('tr');
         var CurrentRowCells = CurrentRow.children();
         var StudentName = CurrentRowCells.eq(1).text();
         if (confirm("Ønsker du slette den studerende " + StudentName + " ?")) {
@@ -239,25 +242,25 @@ $(document).ready(function () {
             SpecifyNumberOfObjectsOnClass();
         }
     });
-    $('body').on('click', '.' + EditStudentClassName, function () {
-        var StudentId = Number($(this).val());
-        var CurrentRow = $(this).closest('tr');
+    (0, jquery_1.default)('body').on('click', '.' + EditStudentClassName, function () {
+        var StudentId = Number((0, jquery_1.default)(this).val());
+        var CurrentRow = (0, jquery_1.default)(this).closest('tr');
         var CurrentRowCells = CurrentRow.children();
         var StudentName = CurrentRowCells.eq(1).text();
         var StudentAge = parseInt(CurrentRowCells.eq(2).text());
         StudentNameSave = txtStudentName.val();
         StudentAgeSave = txtStudentAge.val();
         StudentIdSave = StudentId;
-        ThisSave = $(this);
+        ThisSave = (0, jquery_1.default)(this);
         txtStudentName.val(StudentName);
         txtStudentAge.val(StudentAge);
         SwichBetweenSaveAndEditMode(WorkingMode.Editing);
     });
-    $(document).on("click", ".ContentFrameForHTMLFiles #btnSkipEditStudent", function () {
+    (0, jquery_1.default)(document).on("click", ".ContentFrameForHTMLFiles #btnSkipEditStudent", function () {
         GetStoredValuesBack();
         SwichBetweenSaveAndEditMode(WorkingMode.Saving);
     });
-    $(document).on("click", ".ContentFrameForHTMLFiles #btnEditStudent", function () {
+    (0, jquery_1.default)(document).on("click", ".ContentFrameForHTMLFiles #btnEditStudent", function () {
         var Student_Object;
         var StudentId = Number(ThisSave.val());
         var CurrentRow = ThisSave.closest('tr');
@@ -272,7 +275,7 @@ $(document).ready(function () {
         SwichBetweenSaveAndEditMode(WorkingMode.Saving);
         TypeScriptDemo.html(StudentList.toString());
     });
-    $(document).on("click", ".ContentFrameForHTMLFiles #btnTypeScriptFunctionOverloadDemo", function () {
+    (0, jquery_1.default)(document).on("click", ".ContentFrameForHTMLFiles #btnTypeScriptFunctionOverloadDemo", function () {
         if (TestFunctionOverload.hasClass(HideClassCSSName)) {
             TestFunctionOverload.removeClass(HideClassCSSName);
             btnTypeScriptFunctionOverloadDemo.val(HideClassButtonValue);
@@ -282,7 +285,7 @@ $(document).ready(function () {
             btnTypeScriptFunctionOverloadDemo.val(ShowClassButtonValue);
             txtStudentAdd1.val("");
             txtStudentAdd2.val("");
-            $("#txtStudentsAdded").val("");
+            (0, jquery_1.default)("#txtStudentsAdded").val("");
         }
     });
     function OnlyDigitsInString(InputString) {
@@ -296,7 +299,7 @@ $(document).ready(function () {
         }
         return (true);
     }
-    $(document).on("click", ".ContentFrameForHTMLFiles #btnAddStudent", function () {
+    (0, jquery_1.default)(document).on("click", ".ContentFrameForHTMLFiles #btnAddStudent", function () {
         var OnlyDigitsInString1;
         var OnlyDigitsInString2;
         if (txtStudentAdd1.val().length < 1) {
@@ -310,13 +313,12 @@ $(document).ready(function () {
                 OnlyDigitsInString1 = OnlyDigitsInString(txtStudentAdd1.val());
                 OnlyDigitsInString2 = OnlyDigitsInString(txtStudentAdd2.val());
                 if (OnlyDigitsInString1 && OnlyDigitsInString2) {
-                    $("#txtStudentsAdded").val(AddStudentStuff(parseInt(txtStudentAdd1.val()), parseInt(txtStudentAdd2.val())));
+                    (0, jquery_1.default)("#txtStudentsAdded").val(AddStudentStuff(parseInt(txtStudentAdd1.val()), parseInt(txtStudentAdd2.val())));
                 }
                 else {
-                    $("#txtStudentsAdded").val(AddStudentStuff(txtStudentAdd1.val(), txtStudentAdd2.val()));
+                    (0, jquery_1.default)("#txtStudentsAdded").val(AddStudentStuff(txtStudentAdd1.val(), txtStudentAdd2.val()));
                 }
             }
         }
     });
 });
-//# sourceMappingURL=HandleStudents.js.map

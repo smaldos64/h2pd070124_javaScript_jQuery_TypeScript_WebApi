@@ -14,8 +14,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
  
-  <script type="module" src="../javascriptFiles/PageNavigation.js"></script>
-  <link rel="stylesheet" href="../StyleSheetFiles/StyleSheetLess1.css"/>
+  <script type="module" src="javaScriptFiles/PageNavigation.js"></script>
+  <link rel="stylesheet" href="StyleSheetFiles/StyleSheetLess1.css"/>
 </head>
 
 <body>
@@ -110,6 +110,19 @@
                 </a>
               </li>
 
+              <li>
+                <a class="dropdown-item" href="#" 
+                  data-htmlPageUrl="/Forklaring/DynamiskSideCallbackDemo.html"
+                  data-targetClassName="ContentFrameForHTMLFiles"
+                  data-jsModuleUrl="/javaScriptFiles/DynamiskSideCallbackDemo.js"
+                  data-callbackFunctionName="init_DynamiskSideCallbackDemo"
+                  data-callbackParams='{"numberOfButtonsToInsertOnStartup": 4, 
+                                        "usejQuery": true,
+                                        "backgroundImage": "/Pictures/Struervej1.jfif"}'>
+                  Callback Demo
+                </a>
+              </li>
+
               <li><hr class="dropdown-divider"></li>
 
               <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -146,7 +159,8 @@
                   data-htmlpageUrl="/javaScriptPages/javaScriptBindingDynamic.html" 
                   data-targetClassName="ContentFrameForHTMLFiles"
                   data-jsModuleUrl="/javaScriptFiles/javaScriptBindingDynamic.js"
-                  data-callbackFunctionName="init_javaScriptBindingDynamic">
+                  data-callbackFunctionName="init_javaScriptBindingDynamic"
+                  data-callbackParams="10">
                   javaScriptBindingDynamic
                 </a>
               </li>
@@ -155,7 +169,7 @@
                 <a class="dropdown-item" href="#" 
                   data-htmlpageUrl="/javaScriptPages/javaScriptClassDemo.html" 
                   data-targetClassName="ContentFrameForHTMLFiles"
-                  data-jsModuleUrl="/javaScriptFiles/avaScriptClassDemo.js"
+                  data-jsModuleUrl="/javaScriptFiles/javaScriptClassDemo.js"
                   data-callbackFunctionName="init_javaScriptClassDemo">
                   javaScriptClassDemo
                 </a>
@@ -187,7 +201,8 @@
                   data-htmlpageUrl="/jQueryPages/jQueryBindingDynamic.html" 
                   data-targetClassName="ContentFrameForHTMLFiles"
                   data-jsModuleUrl="/jQueryFiles/jQueryBindingDynamic.js"
-                  data-callbackFunctionName="init_jQueryBindingDynamic">
+                  data-callbackFunctionName="init_jQueryBindingDynamic"
+                  data-callbackParams="8">
                   jQueryBindingDynamic
                 </a>
               </li>
@@ -277,10 +292,7 @@
   <div class="ContentFrameForHTMLFiles MyMargin">
     <h2>Test it</h2>
   </div>
-    
-  <!-- <script type="module" src="../jQueryFiles/jQueryFunctions.js"></script> -->
-   <!-- <script type="module" src="../javaScriptFiles/javaScriptDemoEvent.js"></script>
-   <script type="module" src="../javascriptFiles/javaScriptPageNavigation.js"></script> -->
+   
 </body>
     
 </html>
